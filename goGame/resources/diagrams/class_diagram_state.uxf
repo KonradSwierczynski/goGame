@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>245</x>
+      <y>35</y>
+      <w>252</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+*State*
+--
+-makeAction(request Request,account Account) Request
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>203</y>
+      <w>252</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>*Connected*
+--
+Responisibilities
+- Performs login or register event</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>210</y>
+      <w>252</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>*LoggedIn*
+--
+Responisibilities
+- Performs new game event
+- Performs logout event</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>189</x>
+      <y>70</y>
+      <w>175</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+implements</panel_attributes>
+    <additional_attributes>230.0;10.0;230.0;140.0;10.0;140.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>49</x>
+      <y>28</y>
+      <w>147</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>use state design pattern here</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>399</x>
+      <y>70</y>
+      <w>161</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+implements</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0;210.0;140.0;210.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>266</x>
+      <y>322</y>
+      <w>175</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>*DataBaseConnector*
+Package::tp.project.goGame.server
+--
+-sessionFactory: SessionFactory
+--
++create(account: Account) Request
++update(account: Account) Request
++delete(account: Account) Request
++read() Request
+-findById(int userID) Account
+-getSessionFactory() SessionFactory
+
+--
+Responsibilities
+-- Sending queries to database
+-- retun informaion about event</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>182</x>
+      <y>245</y>
+      <w>175</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+&lt;&lt;uses&gt;</panel_attributes>
+    <additional_attributes>230.0;110.0;230.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>385</x>
+      <y>259</y>
+      <w>189</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+&lt;&lt;uses&gt;</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;50.0;250.0;50.0;250.0;10.0</additional_attributes>
+  </element>
+</diagram>
