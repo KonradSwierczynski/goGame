@@ -4,27 +4,36 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>245</x>
-      <y>35</y>
-      <w>252</w>
-      <h>42</h>
+      <x>336</x>
+      <y>161</y>
+      <w>315</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 *State*
 --
 -makeAction(request Request,account Account) Request
-</panel_attributes>
++logIn(loginCredentials: LoginRequest): void
++logOut(): void
++createAccount(newAccount: Account): void
++playGame(newGameRequest: NewGameRequest): void
++sendMessage(message: MessageRequest): void
++makeMove(move: MoveRequest): Board
++quitGame(): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>203</y>
-      <w>252</w>
-      <h>49</h>
+      <x>21</x>
+      <y>378</y>
+      <w>280</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>*Connected*
+--
++logIn(loginCredentials: LoginRequest): void
++createAccount(newAccount: Account): void
 --
 Responisibilities
 - Performs login or register event</panel_attributes>
@@ -33,12 +42,15 @@ Responisibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>210</y>
-      <w>252</w>
-      <h>56</h>
+      <x>357</x>
+      <y>371</y>
+      <w>294</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>*LoggedIn*
+--
++logOut(): void
++playGame(newGameRequest: NewGameRequest): void
 --
 Responisibilities
 - Performs new game event
@@ -48,20 +60,20 @@ Responisibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>189</x>
-      <y>70</y>
-      <w>175</w>
-      <h>147</h>
+      <x>154</x>
+      <y>308</y>
+      <w>322</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 implements</panel_attributes>
-    <additional_attributes>230.0;10.0;230.0;140.0;10.0;140.0;10.0;190.0</additional_attributes>
+    <additional_attributes>440.0;10.0;440.0;60.0;10.0;60.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>49</x>
-      <y>28</y>
+      <x>175</x>
+      <y>266</y>
       <w>147</w>
       <h>21</h>
     </coordinates>
@@ -71,20 +83,20 @@ implements</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>399</x>
-      <y>70</y>
-      <w>161</w>
-      <h>154</h>
+      <x>490</x>
+      <y>308</y>
+      <w>70</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 implements</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0;210.0;140.0;210.0;200.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>266</x>
-      <y>322</y>
+      <x>392</x>
+      <y>560</y>
       <w>175</w>
       <h>168</h>
     </coordinates>
@@ -109,25 +121,68 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>182</x>
-      <y>245</y>
-      <w>175</w>
-      <h>91</h>
+      <x>147</x>
+      <y>462</y>
+      <w>329</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
-&lt;&lt;uses&gt;</panel_attributes>
-    <additional_attributes>230.0;110.0;230.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>450.0;140.0;450.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>385</x>
-      <y>259</y>
-      <w>189</w>
+      <x>490</x>
+      <y>462</y>
+      <w>49</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>707</x>
+      <y>371</y>
+      <w>280</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>*InGame*
+--
++sendMessage(message: MessageRequest): void
++makeMove(move: MoveRequest): Board
++quitGame(): void
+--
+Responisibilities
+- Performs actions in game
+- Provide chat with opponent</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>532</x>
+      <y>308</y>
+      <w>329</w>
       <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
-&lt;&lt;uses&gt;</panel_attributes>
-    <additional_attributes>10.0;90.0;10.0;50.0;250.0;50.0;250.0;10.0</additional_attributes>
+implements</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;450.0;60.0;450.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>525</x>
+      <y>462</y>
+      <w>350</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;90.0;480.0;90.0;480.0;10.0</additional_attributes>
   </element>
 </diagram>

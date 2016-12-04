@@ -5,7 +5,7 @@
     <id>UMLActor</id>
     <coordinates>
       <x>27</x>
-      <y>297</y>
+      <y>324</y>
       <w>54</w>
       <h>99</h>
     </coordinates>
@@ -16,7 +16,7 @@
     <id>UMLActor</id>
     <coordinates>
       <x>27</x>
-      <y>153</y>
+      <y>180</y>
       <w>54</w>
       <h>99</h>
     </coordinates>
@@ -27,7 +27,7 @@
     <id>UMLUseCase</id>
     <coordinates>
       <x>162</x>
-      <y>171</y>
+      <y>198</y>
       <w>108</w>
       <h>36</h>
     </coordinates>
@@ -40,7 +40,7 @@ bg=blue</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>162</x>
-      <y>279</y>
+      <y>306</y>
       <w>108</w>
       <h>36</h>
     </coordinates>
@@ -52,7 +52,7 @@ bg=blue</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>162</x>
-      <y>342</y>
+      <y>369</y>
       <w>108</w>
       <h>36</h>
     </coordinates>
@@ -64,7 +64,7 @@ bg=blue</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>423</x>
-      <y>315</y>
+      <y>342</y>
       <w>108</w>
       <h>36</h>
     </coordinates>
@@ -76,7 +76,7 @@ game</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>423</x>
-      <y>396</y>
+      <y>423</y>
       <w>108</w>
       <h>36</h>
     </coordinates>
@@ -87,7 +87,7 @@ game</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>423</x>
-      <y>360</y>
+      <y>387</y>
       <w>108</w>
       <h>27</h>
     </coordinates>
@@ -98,7 +98,7 @@ game</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>423</x>
-      <y>441</y>
+      <y>468</y>
       <w>108</w>
       <h>36</h>
     </coordinates>
@@ -109,7 +109,7 @@ game</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>261</x>
-      <y>351</y>
+      <y>378</y>
       <w>180</w>
       <h>72</h>
     </coordinates>
@@ -121,7 +121,7 @@ game</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>261</x>
-      <y>351</y>
+      <y>378</y>
       <w>180</w>
       <h>126</h>
     </coordinates>
@@ -133,7 +133,7 @@ game</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>261</x>
-      <y>342</y>
+      <y>369</y>
       <w>180</w>
       <h>45</h>
     </coordinates>
@@ -145,7 +145,7 @@ game</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>261</x>
-      <y>324</y>
+      <y>351</y>
       <w>180</w>
       <h>54</h>
     </coordinates>
@@ -157,7 +157,7 @@ game</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>72</x>
-      <y>288</y>
+      <y>315</y>
       <w>108</w>
       <h>63</h>
     </coordinates>
@@ -168,7 +168,7 @@ game</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>72</x>
-      <y>171</y>
+      <y>198</y>
       <w>108</w>
       <h>36</h>
     </coordinates>
@@ -179,7 +179,7 @@ game</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>72</x>
-      <y>324</y>
+      <y>351</y>
       <w>108</w>
       <h>54</h>
     </coordinates>
@@ -190,7 +190,7 @@ game</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>144</x>
-      <y>90</y>
+      <y>117</y>
       <w>414</w>
       <h>432</h>
     </coordinates>
@@ -202,7 +202,7 @@ game</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>639</x>
-      <y>171</y>
+      <y>198</y>
       <w>90</w>
       <h>45</h>
     </coordinates>
@@ -214,7 +214,7 @@ GO - Server</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>261</x>
-      <y>171</y>
+      <y>198</y>
       <w>396</w>
       <h>36</h>
     </coordinates>
@@ -225,7 +225,7 @@ GO - Server</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>261</x>
-      <y>180</y>
+      <y>207</y>
       <w>396</w>
       <h>135</h>
     </coordinates>
@@ -236,7 +236,7 @@ GO - Server</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>522</x>
-      <y>180</y>
+      <y>207</y>
       <w>135</w>
       <h>171</h>
     </coordinates>
@@ -247,7 +247,7 @@ GO - Server</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>522</x>
-      <y>180</y>
+      <y>207</y>
       <w>135</w>
       <h>216</h>
     </coordinates>
@@ -258,7 +258,7 @@ GO - Server</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>522</x>
-      <y>180</y>
+      <y>207</y>
       <w>135</w>
       <h>297</h>
     </coordinates>
@@ -269,7 +269,7 @@ GO - Server</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>522</x>
-      <y>180</y>
+      <y>207</y>
       <w>135</w>
       <h>252</h>
     </coordinates>

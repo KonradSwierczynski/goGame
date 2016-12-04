@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>658</x>
+      <y>406</y>
+      <w>224</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>Client
+Package::tp.project.goGame.client
+--
+-account: Account
+-serverSocket: ServerSocket
+-game: GameThread
+--
+-initialize(): void
+-connectWithServer(): void
+-logIn(): void
+-createAccount(): void
+-playGame(size: int): void
+-logOut(): void
+--
+Responsibilities
+-- Allows client to log or create an account
+-- Provides GUI for the game</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>49</x>
+      <y>483</y>
+      <w>224</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>Board
+Package::tp.project.goGame.client
+--
+-fields: ArrayList&lt;int&gt;
+--
++Board(size: int)
++getSize(): int
++set(fields: ArrayList&lt;int&gt;): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>357</x>
+      <y>441</y>
+      <w>224</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>GameThread
+Package::tp.project.goGame.client
+--
+-account: Account
+-serverSocket: ServerSocket
+-board: Board
+--
+-run(): void
+-makeMove(x: int, y: int): void
+-sendMessage(message: String): void
+-quit(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>574</x>
+      <y>455</y>
+      <w>98</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>266</x>
+      <y>490</y>
+      <w>105</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+  </element>
+</diagram>

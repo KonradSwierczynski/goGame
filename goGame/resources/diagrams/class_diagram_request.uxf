@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2.0">
-  <zoom_level>7</zoom_level>
+  <zoom_level>14</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>252</x>
-      <y>91</y>
-      <w>98</w>
-      <h>98</h>
+      <x>574</x>
+      <y>364</y>
+      <w>196</w>
+      <h>196</h>
     </coordinates>
     <panel_attributes>/Abstract Class/
 *Request*
@@ -23,10 +23,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>84</x>
-      <y>210</y>
-      <w>70</w>
-      <h>21</h>
+      <x>238</x>
+      <y>602</y>
+      <w>140</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>LoginRequest</panel_attributes>
     <additional_attributes/>
@@ -34,10 +34,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>112</x>
-      <y>182</y>
-      <w>203</w>
-      <h>42</h>
+      <x>294</x>
+      <y>546</y>
+      <w>406</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>270.0;10.0;10.0;40.0</additional_attributes>
@@ -45,10 +45,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>147</x>
-      <y>245</y>
-      <w>77</w>
-      <h>21</h>
+      <x>364</x>
+      <y>672</y>
+      <w>154</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>RegisterRequest</panel_attributes>
     <additional_attributes/>
@@ -56,10 +56,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>182</x>
-      <y>182</y>
-      <w>133</w>
-      <h>77</h>
+      <x>434</x>
+      <y>546</y>
+      <w>266</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>170.0;10.0;10.0;90.0</additional_attributes>
@@ -67,10 +67,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>252</x>
-      <y>252</y>
-      <w>91</w>
-      <h>21</h>
+      <x>574</x>
+      <y>686</y>
+      <w>182</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>NewGameRequest</panel_attributes>
     <additional_attributes/>
@@ -78,10 +78,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>294</x>
-      <y>182</y>
-      <w>21</w>
-      <h>84</h>
+      <x>658</x>
+      <y>546</y>
+      <w>42</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
@@ -89,10 +89,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>448</x>
-      <y>210</y>
-      <w>70</w>
-      <h>21</h>
+      <x>966</x>
+      <y>602</y>
+      <w>140</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>MoveRequest</panel_attributes>
     <additional_attributes/>
@@ -100,10 +100,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>294</x>
-      <y>182</y>
-      <w>168</w>
-      <h>49</h>
+      <x>658</x>
+      <y>546</y>
+      <w>336</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;220.0;50.0</additional_attributes>
@@ -111,10 +111,10 @@
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>84</x>
-      <y>77</y>
-      <w>98</w>
-      <h>49</h>
+      <x>238</x>
+      <y>336</y>
+      <w>196</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>We can use 
 /factory design pattern/
@@ -124,10 +124,10 @@ here</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>175</x>
-      <y>105</y>
-      <w>91</w>
-      <h>35</h>
+      <x>420</x>
+      <y>392</y>
+      <w>182</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>110.0;10.0;10.0;30.0</additional_attributes>
@@ -135,10 +135,10 @@ here</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>483</x>
-      <y>259</y>
-      <w>105</w>
-      <h>21</h>
+      <x>1036</x>
+      <y>700</y>
+      <w>210</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>MessageRequest</panel_attributes>
     <additional_attributes/>
@@ -146,10 +146,10 @@ here</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>294</x>
-      <y>182</y>
-      <w>252</w>
-      <h>91</h>
+      <x>658</x>
+      <y>546</y>
+      <w>504</w>
+      <h>182</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;340.0;110.0</additional_attributes>
@@ -157,10 +157,10 @@ here</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>441</x>
-      <y>98</y>
-      <w>77</w>
-      <h>105</h>
+      <x>952</x>
+      <y>378</y>
+      <w>154</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>enum
 *Type*
@@ -176,10 +176,10 @@ here</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>343</x>
-      <y>98</y>
-      <w>112</w>
-      <h>28</h>
+      <x>756</x>
+      <y>378</y>
+      <w>224</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -188,10 +188,10 @@ here</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>42</x>
-      <y>259</y>
-      <w>84</w>
-      <h>21</h>
+      <x>154</x>
+      <y>700</y>
+      <w>168</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>WarningRequest</panel_attributes>
     <additional_attributes/>
@@ -199,10 +199,10 @@ here</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>84</x>
-      <y>182</y>
-      <w>231</w>
-      <h>91</h>
+      <x>238</x>
+      <y>546</y>
+      <w>462</w>
+      <h>182</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>310.0;10.0;10.0;110.0</additional_attributes>
@@ -210,10 +210,10 @@ here</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>371</x>
-      <y>266</y>
-      <w>98</w>
-      <h>21</h>
+      <x>812</x>
+      <y>714</y>
+      <w>196</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>GameOverRequest</panel_attributes>
     <additional_attributes/>
@@ -221,10 +221,10 @@ here</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>294</x>
-      <y>182</y>
-      <w>140</w>
-      <h>98</h>
+      <x>658</x>
+      <y>546</y>
+      <w>280</w>
+      <h>196</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;180.0;120.0</additional_attributes>
