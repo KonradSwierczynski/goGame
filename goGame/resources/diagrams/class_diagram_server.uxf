@@ -43,6 +43,7 @@ extends Thread
 -account: Account
 -state: State
 -clientSocket: Socket
+-gameSize: int
 --
 -run(): void
 --
@@ -92,8 +93,10 @@ Package::tp.project.goGoame.server
 Package::tp.project.goGame.server
 extends Thread
 --
--player1: QueueUnit
--player2: QueueUnit
+-player1: Socket
+-player2: Socket
+-player1_acc : Account
+-player2_acc: Account
 --
 -run() 
 --makeAction(request: Request) Request
@@ -203,52 +206,5 @@ m1=0..n</panel_attributes>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>768</x>
-      <y>408</y>
-      <w>216</w>
-      <h>152</h>
-    </coordinates>
-    <panel_attributes>QueueUnit
-Package::tp.project.goGame.server
---
--account: Account
--clientSocket: ClientSocket
--size: int
---
--getters
--setters
---
-Responsibilities
--- Holds information needed to match
-   opponents in queue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>616</x>
-      <y>448</y>
-      <w>168</w>
-      <h>32</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>728</x>
-      <y>200</y>
-      <w>184</w>
-      <h>224</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-
-m1=0..n</panel_attributes>
-    <additional_attributes>190.0;260.0;190.0;190.0;10.0;190.0;10.0;10.0;40.0;10.0</additional_attributes>
   </element>
 </diagram>
