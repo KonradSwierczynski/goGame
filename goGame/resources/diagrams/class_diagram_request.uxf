@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2.0">
-  <zoom_level>14</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>574</x>
-      <y>364</y>
-      <w>196</w>
-      <h>196</h>
+      <x>54</x>
+      <y>216</y>
+      <w>84</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>/Abstract Class/
 *Request*
@@ -23,144 +23,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>238</x>
-      <y>602</y>
-      <w>140</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>LoginRequest</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>294</x>
-      <y>546</y>
-      <w>406</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>270.0;10.0;10.0;40.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>364</x>
-      <y>672</y>
-      <w>154</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>RegisterRequest</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>434</x>
-      <y>546</y>
-      <w>266</w>
-      <h>154</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>170.0;10.0;10.0;90.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>574</x>
-      <y>686</y>
-      <w>182</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>NewGameRequest</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>658</x>
-      <y>546</y>
-      <w>42</w>
-      <h>168</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>966</x>
-      <y>602</y>
-      <w>140</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>MoveRequest</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>658</x>
-      <y>546</y>
-      <w>336</w>
-      <h>98</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;220.0;50.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>238</x>
-      <y>336</y>
-      <w>196</w>
-      <h>98</h>
-    </coordinates>
-    <panel_attributes>We can use 
-/factory design pattern/
-here</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>420</x>
-      <y>392</y>
-      <w>182</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>110.0;10.0;10.0;30.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1036</x>
-      <y>700</y>
-      <w>210</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>MessageRequest</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>658</x>
-      <y>546</y>
-      <w>504</w>
-      <h>182</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;340.0;110.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>952</x>
-      <y>378</y>
-      <w>154</w>
-      <h>210</h>
+      <x>216</x>
+      <y>222</y>
+      <w>66</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>enum
 *Type*
@@ -176,57 +42,13 @@ here</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
-      <y>378</y>
-      <w>224</w>
-      <h>56</h>
+      <x>132</x>
+      <y>222</y>
+      <w>96</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
     <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>154</x>
-      <y>700</y>
-      <w>168</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>WarningRequest</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>238</x>
-      <y>546</y>
-      <w>462</w>
-      <h>182</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>310.0;10.0;10.0;110.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>812</x>
-      <y>714</y>
-      <w>196</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>GameOverRequest</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>658</x>
-      <y>546</y>
-      <w>280</w>
-      <h>196</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;180.0;120.0</additional_attributes>
   </element>
 </diagram>
