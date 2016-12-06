@@ -9,7 +9,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 import tp.project.goGame.server.Account;
-import tp.project.goGame.server.Server;
 
 public class DataBaseConnector {
 	

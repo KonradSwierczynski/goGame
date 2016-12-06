@@ -25,4 +25,20 @@ public class Server {
 
 	}
 
+	public static Socket getClientSocket() {
+		return clientSocket;
+	}
+
+	public static void setClientSocket(Socket clientSocket) {
+		Server.clientSocket = clientSocket;
+	}
+
+	public static ServerSocket getServerSocket() {
+		return serverSocket;
+	}
+
+	public static void setServerSocket(ServerSocket serverSocket) {
+		Server.serverSocket = serverSocket;
+	}
+
 }

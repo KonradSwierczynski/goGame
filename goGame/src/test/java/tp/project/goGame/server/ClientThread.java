@@ -66,4 +66,14 @@ public class ClientThread extends Thread{
 	{
 		return this.myState;
 	}
+
+
+	public Account getAccount() {
+		return account;
+	}
+
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 }
