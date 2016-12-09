@@ -24,7 +24,7 @@ public class ConnectedState implements MyState {
 	}
 
 	public Request LogIn(ClientThread client, String input) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

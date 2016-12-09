@@ -50,7 +50,7 @@ public class ClientThread extends Thread{
 			request = myState.LogIn(this, request.getValue());
 		break;
 		default:
-            System.out.println("Invalid month.");
+            System.out.println("Invalid message");
         break;
 		}
 		
