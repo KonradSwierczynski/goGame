@@ -1,8 +1,8 @@
 package tp.project.goGame.state;
 
-import tp.project.goGame.request.Request;
 import tp.project.goGame.server.ClientThread;
 import tp.project.goGame.server.GameThread;
+import tp.project.goGame.shared.Request;
 
 public interface MyState {
 	void ChangeState(ClientThread client, MyState state);

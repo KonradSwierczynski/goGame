@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import tp.project.goGame.server.Account;
+import tp.project.goGame.shared.Account;
 
 public class DataBaseConnector {
 	

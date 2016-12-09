@@ -1,12 +1,14 @@
 package tp.project.goGame.server;
 
+import tp.project.goGame.shared.Account;
+import tp.project.goGame.shared.Protocol;
+import tp.project.goGame.shared.Request;
 import tp.project.goGame.state.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import tp.project.goGame.request.Request;
 
 public class ClientThread extends Thread{
 	private BufferedReader in = null;

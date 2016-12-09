@@ -1,4 +1,4 @@
-package tp.project.goGame.request;
+package tp.project.goGame.shared;
 
 public enum Type {
 	LOGIN,

@@ -1,4 +1,4 @@
-package tp.project.goGame.server;
+package tp.project.goGame.shared;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

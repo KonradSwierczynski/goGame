@@ -1,6 +1,4 @@
-package tp.project.goGame.server;
-
-import tp.project.goGame.request.Request;
+package tp.project.goGame.shared;
 
 public class Protocol {
 	public static Request getRequest(String value)
