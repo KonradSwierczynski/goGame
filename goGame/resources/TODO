@@ -1,6 +1,10 @@
 TODO LIST:
 
-1. class_diagram_client -- Konrad
-2. queue system -- Bartek - done
-3. game over handle -- Bartek - done
-4. modifying state diagram -- Konrad - done
+1.Basic communication server-client:
+	a. connect
+	b. send register request
+	c. send login request
+	d. send log out request
+	
+2. Basic welcome GUI, Reqister form, Login Form, basic client log - Konrad
+3. Request handle : login, register, logout. Basic server log.
