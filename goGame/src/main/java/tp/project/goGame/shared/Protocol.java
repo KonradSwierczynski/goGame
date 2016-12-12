@@ -98,8 +98,6 @@ public class Protocol {
 		
 		String nickname = line;
 		
-
-		
 		Account out = new Account(username,password,nickname,email);
 		System.out.println(out.toString());
 		

@@ -1,5 +1,6 @@
 package tp.project.goGame.client.Model;
 
+import java.awt.CardLayout;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +13,7 @@ import tp.project.goGame.shared.*;
 public class Model {
 	
 	private String serverAddress = "Localhost";
-	private Socket socket;
+	private Socket client;
 	private BufferedReader in;
 	private PrintWriter out;
 	private Account account;
@@ -23,26 +24,38 @@ public class Model {
 	
 	private void Connect() {
 		try {
-			socket = new Socket(serverAddress, 5000);
-			out = new PrintWriter(socket.getOutputStream(), true);
-			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			System.out.println(in.readLine());
+			client = new Socket(serverAddress, 7788);
+			out = new PrintWriter(client.getOutputStream(), true);
+			in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+			checkConnection();
 		} catch (Exception e) {
 			System.err.print(e.toString());
 			e.printStackTrace();
 		}
 	}
 	
-	public void CreateAccount(Account account) {
-		Request request = new Request(Type.REGISTER, account.toString());
+	private void checkConnection() throws Exception {
+		String line;
+		line = in.readLine();
+		if(line != null) {
+			if(!(Protocol.getRequest(line).getType().equals(Type.ACCEPT) && (Protocol.getRequest(line).getValue().equals("pass")))) {
+				in.close();
+				out.close();
+				client.close();
+				throw new Exception("Failde to connect");
+			}
+		}
+	}
+
+	public void CreateAccount(String username, String password, String email, String nick) {
+		Request request = new Request(Type.REGISTER, username + ":" + password + ":" + email + ":" +nick);
 		String message = Protocol.getMessage(request);
 		out.println(message);
 	}
 	
 	public void LogIn(String username, String password) {
-		Request reguest = Protocol.getRequest("LogIn:" + username + ", " + password);
-		String message = Protocol.getMessage(reguest);
+		Request request = new Request(Type.LOGIN, username + ":" + password + "::");
+		String message = Protocol.getMessage(request);
 		out.println(message);
 	}
-
 }
