@@ -8,5 +8,6 @@ public enum Type {
 	MESSAGE,
 	WARNING,
 	ACCEPT,
-	DENY
+	DENY,
+	EXIT
 }

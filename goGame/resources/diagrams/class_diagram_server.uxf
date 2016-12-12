@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2.0">
-  <zoom_level>5</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>475</x>
-      <y>250</y>
-      <w>165</w>
-      <h>100</h>
+      <x>760</x>
+      <y>248</y>
+      <w>264</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>*Server*
 Package::tp.project.goGame.server
@@ -28,10 +28,10 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>255</x>
-      <y>100</y>
-      <w>140</w>
-      <h>140</h>
+      <x>408</x>
+      <y>8</y>
+      <w>224</w>
+      <h>224</h>
     </coordinates>
     <panel_attributes>*ClientThread*
 Package::tp.project.goGame.server
@@ -57,10 +57,10 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>390</x>
-      <y>105</y>
-      <w>95</w>
-      <h>195</h>
+      <x>624</x>
+      <y>16</y>
+      <w>152</w>
+      <h>312</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n</panel_attributes>
@@ -69,10 +69,10 @@ m1=0..n</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>255</x>
-      <y>335</y>
-      <w>135</w>
-      <h>55</h>
+      <x>408</x>
+      <y>384</y>
+      <w>216</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>*Protocol*
 Package::tp.project.goGoame.server
@@ -86,10 +86,10 @@ Package::tp.project.goGoame.server
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>255</x>
-      <y>425</y>
-      <w>135</w>
-      <h>115</h>
+      <x>408</x>
+      <y>528</y>
+      <w>216</w>
+      <h>184</h>
     </coordinates>
     <panel_attributes>*GameThread*
 Package::tp.project.goGame.server
@@ -112,9 +112,9 @@ Responsibilities
     <id>UMLNote</id>
     <coordinates>
       <x>0</x>
-      <y>395</y>
-      <w>185</w>
-      <h>130</h>
+      <y>480</y>
+      <w>296</w>
+      <h>208</h>
     </coordinates>
     <panel_attributes>run()
 {
@@ -128,10 +128,10 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>465</y>
-      <w>85</w>
-      <h>15</h>
+      <x>288</x>
+      <y>592</y>
+      <w>136</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>150.0;10.0;10.0;10.0</additional_attributes>
@@ -139,10 +139,10 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>85</x>
-      <y>190</y>
-      <w>115</w>
-      <h>110</h>
+      <x>136</x>
+      <y>152</y>
+      <w>184</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>*Account*
 Package::tp.project.goGame.server
@@ -164,10 +164,10 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>195</x>
-      <y>150</y>
-      <w>70</w>
-      <h>90</h>
+      <x>312</x>
+      <y>88</y>
+      <w>112</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -176,10 +176,10 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>385</x>
-      <y>295</y>
-      <w>100</w>
-      <h>155</h>
+      <x>616</x>
+      <y>320</y>
+      <w>160</w>
+      <h>248</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n</panel_attributes>
@@ -188,10 +188,10 @@ m1=0..n</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>325</x>
-      <y>235</y>
-      <w>35</w>
-      <h>110</h>
+      <x>520</x>
+      <y>224</y>
+      <w>56</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -200,10 +200,10 @@ m1=0..n</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>325</x>
-      <y>385</y>
-      <w>35</w>
-      <h>50</h>
+      <x>520</x>
+      <y>464</y>
+      <w>56</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>

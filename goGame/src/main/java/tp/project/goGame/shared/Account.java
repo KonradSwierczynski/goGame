@@ -40,6 +40,7 @@ public class Account {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.nickname = nickname;
 		this.gamesWon = 0;
 		this.gamesLost = 0;
 	}
@@ -47,6 +48,7 @@ public class Account {
 	public Account(String username,String password, String nickname, String email, int gamesWon,int gamesLost) {
 		this.username = username;
 		this.password = password;
+		this.nickname = nickname;
 		this.email = email;
 		this.gamesWon = gamesWon;
 		this.gamesLost = gamesLost;

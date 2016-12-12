@@ -49,7 +49,7 @@ public class DataBaseConnector {
 	public static List<Account> read() {
 		Session session = getSessionFactory().openSession();
 		@SuppressWarnings("unchecked")
-		List<Account> Accounts = session.createQuery("FROM Account").getResultList();
+		List<Account> Accounts = session.createQuery("FROM Account").list();
 		session.close();
 		System.out.println("Found " + Accounts.size() + " Accounts");
 		return Accounts;
