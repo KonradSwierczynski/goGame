@@ -39,6 +39,7 @@ public class Server {
                 clientSocket = serverSocket.accept();
                 clients.addElement(new ClientThread(clientSocket));
                 clients.lastElement().start();
+                log("New connection: " + clientSocket.getInetAddress());
             }
         } catch (IOException e) {
 			e.printStackTrace();
@@ -61,5 +62,11 @@ public class Server {
 	public static void log(String message)
 	{
 		gui.addLog(message);
+	}
+	
+	@SuppressWarnings("unused")
+	public static void log(Socket client,String message)
+	{
+		gui.addLog(client.getInetAddress() + ">" + message);
 	}
 }

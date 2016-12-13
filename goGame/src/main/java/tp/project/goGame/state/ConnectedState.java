@@ -2,6 +2,9 @@ package tp.project.goGame.state;
 
 import java.util.List;
 
+import exceptions.AccountExistsException;
+import exceptions.NoAccountFoundException;
+import exceptions.WrongPasswordException;
 import tp.project.goGame.server.ClientThread;
 import tp.project.goGame.server.GameThread;
 import tp.project.goGame.shared.Account;
@@ -12,52 +15,48 @@ import tp.project.goGame.shared.Type;
 public class ConnectedState implements MyState {
 	private static MyState instance;
 	
-	public static MyState getInstance(){
-		if(instance == null)
-		{
-			synchronized(ConnectedState.class)
-			{
-				if(instance == null)
-					instance = new ConnectedState();
-			}
-		}
-		return instance;
-	}
+
 
 	public void ChangeState(ClientThread client,MyState state) {
 		client.changeState(state);
 	}
 
-	public Request LogIn(ClientThread client, String input) {
+	public Request LogIn(ClientThread client, String input) throws NoAccountFoundException, WrongPasswordException {
 		Account logAccount = Protocol.getAccount(input);
 		List<Account> accs = DataBaseConnector.getInstance().read();
+		Account out = null;
 		for(Account a : accs)
 		{
-			if(a.getUsername().equals(logAccount.getUsername()))
+			if(a.getUsername().equals(logAccount.getUsername()) && a.getPassword().equals(logAccount.getPassword()))
 			{
-				logAccount = a;
+				out = a;
 				break;
+			}
+			
+			if(a.getUsername().equals(logAccount.getUsername()) && !a.getPassword().equals(logAccount.getPassword()))
+			{
+				throw new WrongPasswordException();
 			}
 		}
 		
-		client.setAccount(logAccount);
+		if(out == null)
+		{
+			throw new NoAccountFoundException(logAccount.getUsername());
+		}
+		
+		client.setAccount(out);
 		client.changeState(new LoggedInState());
-		return new Request(Type.ACCEPT,"pass");
+		return new Request(Type.LOGIN,out.getNickname());
 	}
 
-	public Request Register(String input) {
+	public Request Register(String input) throws AccountExistsException {
 		Account newAccount = Protocol.getAccount(input);
 		DataBaseConnector dbc = DataBaseConnector.getInstance();
 		dbc.create(newAccount);
-		return new Request(Type.ACCEPT,"okey");
+		return new Request(Type.REGISTER,"ok");
 	}
 
 	public Request LogOut(ClientThread client) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Request playGame(ClientThread client, String input) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -85,6 +84,12 @@ public class ConnectedState implements MyState {
 	public Request QuitQueue(ClientThread client) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "ConnectedState";
 	}
 
 }

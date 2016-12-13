@@ -9,5 +9,9 @@ public enum Type {
 	WARNING,
 	ACCEPT,
 	DENY,
-	EXIT
+	EXIT,
+	LOGOUT,
+	NEWGAME,
+	PASS,
+	LEAVEQUEUE
 }

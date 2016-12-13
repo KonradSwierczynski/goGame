@@ -7,6 +7,18 @@ public class Protocol {
 		Request out = null;
 		switch(str)
 		{
+		case "LQU":
+			out = new Request(Type.LEAVEQUEUE,value.substring(3));
+			break;
+		case "PAS":
+			out = new Request(Type.PASS,value.substring(3));
+			break;
+		case "NGM":
+			out = new Request(Type.NEWGAME,value.substring(3));
+			break;
+		case "LOU":
+			out = new Request(Type.LOGOUT,value.substring(3));
+			break;
 		case "MSG":
 			out = new Request(Type.MESSAGE,value.substring(3));
 			break;
@@ -47,6 +59,18 @@ public class Protocol {
 		
 		switch(request.getType())
 		{
+		case LEAVEQUEUE:
+			out = "LQU" + request.getValue();
+			break;
+		case PASS:
+			out = "PAS" + request.getValue();
+			break;
+		case NEWGAME:
+			out = "NGM" + request.getValue();
+			break;
+		case LOGOUT:
+			out = "LOU" + request.getValue();
+			break;
 		case ACCEPT:
 			out = "ACC" + request.getValue();
 			break;

@@ -1,0 +1,43 @@
+REGISTER:
+	"REGusername:password:email:nickname"
+LOGIN:
+	"LOGusername:password::"
+LOGOUT:
+	"LOUnickname"
+NEWGAME:
+	"NGM***size" (*** to pvp/bot)
+EXIT:
+	"EXTmessage"
+WARNING:
+	"WARmessage"
+DENY:
+	"DNYmessage"
+	
+<!------------------------ nowe --------------------------->
+
+MOVE:
+	"MOVx:y:color" (color: w/c)
+GAMEOVER:
+	"GMOwinner:loser" (jako username)
+PASS:
+	"PASusername"
+	
+
+<!------------------------ użycia ------------------------->
+
+Wysłane		Odebrane		opis
+
+
+REGISTER	DENY/REGISTER	dane istnieją/ok zarejestrowano
+
+LOGIN		DENY/LOGIN		nieprawidłowe dane/ok zalogowano
+
+NEWGAME		NEWGAME			ok dodaj do queue albo gry z botem
+
+MESSAGE		MESSAGE			ok wyświetl wiadomośc
+
+MOVE		DENY/MOVE		zły ruch/OK POKAŻ RUCH NA PLANSZY
+
+GAMEOVER	GAMEOVER		koniec gry
+
+PASS		PASS			ok zrób pas

@@ -12,6 +12,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import exceptions.AccountExistsException;
+import exceptions.NoAccountFoundException;
+import exceptions.WrongPasswordException;
+
 public class ClientThread extends Thread{
 	private BufferedReader in = null;
 	private PrintWriter out = null;
@@ -38,9 +42,10 @@ public class ClientThread extends Thread{
 				String outLine;
 				line = in.readLine();
 				
+				log(clientSocket, Protocol.getRequest(line).getType() + ": " + Protocol.getRequest(line).getValue());
 				outLine = Protocol.getMessage(proceedAction(line));
-				log(clientSocket.getInetAddress() + ">" + Protocol.getRequest(line).getType() + ": " + Protocol.getRequest(line).getValue());
 				out.println(outLine);
+				
 				if(Protocol.getRequest(line).getType() == Type.EXIT)
 					break;
 			}
@@ -69,8 +74,33 @@ public class ClientThread extends Thread{
 		Request outRequest = null;
 		switch(request.getType())
 		{
+		case LEAVEQUEUE:
+			outRequest = myState.QuitQueue(this);
+			log(this.clientSocket,myState.toString());
+			break;
+		case PASS:
+			
+			break;
+		case NEWGAME:
+			outRequest = myState.PlayGame(this, request.getValue());
+			log(this.clientSocket,myState.toString());
+			break;
+		case ACCEPT:
+			break;
+		case DENY:
+			break;
+		case GAMEOVER:
+			break;
+		case MOVE:
+			break;
+		case WARNING:
+			break;
 		case LOGIN:
-			outRequest = myState.LogIn(this, request.getValue());
+			try {
+				outRequest = myState.LogIn(this, request.getValue());
+			} catch (NoAccountFoundException | WrongPasswordException e) {
+				outRequest = new Request(Type.DENY,e.getMessage());
+			}
 			break;
 		case MESSAGE:
 			outRequest = new Request(Type.MESSAGE,request.getValue());
@@ -79,11 +109,19 @@ public class ClientThread extends Thread{
 			outRequest = new Request(Type.EXIT,"bye");
 			break;
 		case REGISTER:
-			outRequest = myState.Register(request.getValue());
+			try {
+				outRequest = myState.Register(request.getValue());
+			} catch (AccountExistsException e) {
+				outRequest = new Request(Type.DENY,e.getMessage());
+			}
+			break;
+		case LOGOUT:
+			outRequest = myState.LogOut(this);
 			break;
 		default:
             System.out.println("Invalid message");
         break;
+		
 		}
 		
 		return outRequest;
@@ -103,15 +141,24 @@ public class ClientThread extends Thread{
 	public Account getAccount() {
 		return account;
 	}
+	
+	public void setGameSize(int gameSize)
+	{
+		this.gameSize = gameSize;
+	}
+	
+	public int getGameSize()
+	{
+		return this.gameSize;
+	}
 
 
 	public void setAccount(Account account) {
 		this.account = account;
 	}
 	
-	@SuppressWarnings("unused")
-	private static void log(String message)
+	private static void log(Socket client, String message)
 	{
-		Server.getInstance().log(message);
+		Server.getInstance().log(client,message);
 	}
 }

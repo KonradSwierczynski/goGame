@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
+import exceptions.AccountExistsException;
 import tp.project.goGame.shared.Account;
 
 public class DataBaseConnector {
@@ -35,8 +36,18 @@ public class DataBaseConnector {
 		return sessionFactory;
 	}
 	
-	public static Integer create(Account e) {
+	public static Integer create(Account e) throws AccountExistsException {
 		Session session = getSessionFactory().openSession();
+		List<Account> Accounts = session.createQuery("FROM Account").list();
+		for(Account a: Accounts)
+		{
+			if(a.getUsername().equals(e.getUsername()))
+				throw new AccountExistsException(e.getUsername());
+			if(a.getEmail().equals(e.getEmail()))
+				throw new AccountExistsException(e.getEmail());
+			if(a.getNickname().equals(e.getNickname()))
+				throw new AccountExistsException(e.getNickname());
+		}
 		session.beginTransaction();
 		session.save(e);
 		session.getTransaction().commit();
