@@ -204,24 +204,24 @@ public class ClientGUI implements ActionListener {
 		
 		JRadioButton radioButton = new JRadioButton("13x13");
 		radioButton.setActionCommand("13");
-		radioButton.setBounds(35, 109, 109, 23);
+		radioButton.setBounds(282, 108, 109, 23);
 		panel_choice.add(radioButton);
 		radioButton.addActionListener(this);
 		
 		JRadioButton radioButton_1 = new JRadioButton("19x19");
 		radioButton_1.setActionCommand("19");
-		radioButton_1.setBounds(35, 69, 109, 23);
+		radioButton_1.setBounds(282, 66, 109, 23);
 		panel_choice.add(radioButton_1);
 		radioButton_1.addActionListener(this);
 		
 		JRadioButton radioButton_2 = new JRadioButton("9x9");
 		radioButton_2.setActionCommand("9");
-		radioButton_2.setBounds(35, 147, 109, 23);
+		radioButton_2.setBounds(282, 153, 109, 23);
 		panel_choice.add(radioButton_2);
 		radioButton_2.addActionListener(this);
 		
 		chckbxBot = new JCheckBox("bot");
-		chckbxBot.setBounds(35, 201, 97, 23);
+		chckbxBot.setBounds(294, 199, 97, 23);
 		panel_choice.add(chckbxBot);
 		
 		JButton btnStart = new JButton("START");
@@ -236,13 +236,22 @@ public class ClientGUI implements ActionListener {
 				clientModel.sendToServer(Protocol.getMessage(temp));
 			}
 		});
-		btnStart.setBounds(315, 201, 89, 23);
+		btnStart.setBounds(161, 87, 89, 23);
 		panel_choice.add(btnStart);
 		
 		ButtonGroup group = new ButtonGroup();
 		group.add(radioButton_1);
 		group.add(radioButton_2);
 		group.add(radioButton);
+		
+		JButton btnNewButton_1 = new JButton("back");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showLogged();
+			}
+		});
+		btnNewButton_1.setBounds(10, 228, 89, 23);
+		panel_choice.add(btnNewButton_1);
 		
 		JPanel panel_queue = new JPanel();
 		panel.add(panel_queue, "queue");
