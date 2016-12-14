@@ -27,7 +27,7 @@ public class ClientGUI implements ActionListener {
 
 	private ClientModel clientModel = null;
 
-	private JFrame frame;
+	public JFrame frame;
 	private JPanel panel;
 	private JPanel panel_wel;
 	private JPanel panel_reg;
@@ -94,8 +94,9 @@ public class ClientGUI implements ActionListener {
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Request temp =  new Request(Type.LOGIN,usernameField.getText()+":"+passwordField.getText()+"::");
-				clientModel.sendToServer(Protocol.getMessage(temp));
+				startGame();
+				//Request temp =  new Request(Type.LOGIN,usernameField.getText()+":"+passwordField.getText()+"::");
+				//clientModel.sendToServer(Protocol.getMessage(temp));
 			}
 		});
 		btnLogIn.setBounds(49, 164, 89, 23);
@@ -282,6 +283,10 @@ public class ClientGUI implements ActionListener {
                 e.getWindow().dispose();
             }
         });
+	}
+	
+	private void startGame() {
+		GameGUI game = new GameGUI(this.clientModel, this);
 	}
 	
 	public JFrame getFrame()
