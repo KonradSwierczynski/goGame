@@ -27,7 +27,7 @@ public class ClientGUI implements ActionListener {
 
 	private ClientModel clientModel = null;
 
-	public JFrame frame;
+	private JFrame frame;
 	private JPanel panel;
 	private JPanel panel_wel;
 	private JPanel panel_reg;

@@ -62,7 +62,7 @@ public class GameGUI {
 	public GameGUI(final ClientModel clientModel, ClientGUI clientGUI) {
 		this.clientModel = clientModel;
 		this.clientGUI = clientGUI;
-		clientGUI.frame.setVisible(false);
+		clientGUI.getFrame().setVisible(false);
 		initialize();
 		frame.setVisible(true);
 	}
