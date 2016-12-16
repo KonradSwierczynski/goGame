@@ -1,0 +1,8 @@
+Values in board BLACK = 1, WHITE = 2, EMPTY = 0
+
+Sizes of board in GameSize enum
+	size9x9 (9),
+	size13x13 (13),
+	size19x19 (19);
+	
+	getValue() : int <- getter for size value

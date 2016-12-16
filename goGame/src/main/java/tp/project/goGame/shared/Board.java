@@ -7,15 +7,15 @@ public class Board {
 	public int BLACK = 1, WHITE = 2, EMPTY = 0;
 	
 	private int[][] board;
-	private int size;
+	private GameSize size;t 
 	
-	public Board(int size) {
+	public Board(GameSize size) {
 		//TODO size should be from enum Size (switch here)
-		board = new int[size][size];
+		board = new int[size.getValue()][size.getValue()];
 		this.size = size;
 	}
 	
-	public int getSize() {
+	public GameSize getSize() {
 		//TODO should return enum Size
 		return size;
 	}
