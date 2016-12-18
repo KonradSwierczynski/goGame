@@ -6,3 +6,14 @@ Sizes of board in GameSize enum
 	size19x19 (19);
 	
 	getValue() : int <- getter for size value
+	
+---------------------------------------------------------------
+
+new Board(gameSize : GameSize) <- to create new board pass only gameSize
+
+MakeMove(x : int, y : int, color : int) <- to make move, pass position and color of new added stone
+	
+getBoard() <- returns actual board int String
+	format: color:color:...::color:color...		:: means new row
+	
+restoreBoard(board : String) <- updates board to board passed in String

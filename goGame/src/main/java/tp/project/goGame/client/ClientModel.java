@@ -35,6 +35,7 @@ public class ClientModel {
 	private String nickname = null;
 	private ClientGUI gui = null;
 	private int gameSize;
+	private int myColor;
 	
 	public static void main(String[] args)
 	{
@@ -85,6 +86,11 @@ public class ClientModel {
 	public int getGameSize()
 	{
 		return this.gameSize;
+	}
+	
+	public void sendMove(int x, int y) {
+		Request request = new Request(Type.MOVE, Integer.toString(x) + ":" + Integer.toString(y) + ":" + Integer.toString(myColor));
+		sendToServer(Protocol.getMessage(request));
 	}
 	
 	class ListenFromServer extends Thread
