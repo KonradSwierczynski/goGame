@@ -2,9 +2,13 @@ package exceptions;
 
 public class WrongMoveException extends Exception {
 
+	public WrongMoveException(String string) {
+		super(string);
+	}
+
 	@Override
 	public String getMessage()
 	{
-		return "Wrong password!";
+		return super.getMessage();
 	}
 }

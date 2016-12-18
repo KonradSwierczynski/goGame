@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -21,6 +22,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import tp.project.goGame.shared.GameSize;
 import tp.project.goGame.shared.Protocol;
 import tp.project.goGame.shared.Request;
 import tp.project.goGame.shared.Type;
@@ -29,6 +31,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.Rectangle;
 import javax.swing.JTable;
@@ -38,8 +41,10 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -58,6 +63,7 @@ public class GameGUI {
 	private JButton btnSendMessage;
 	private JTextArea textAreaMessages;
 	private JTextField textFieldNewMessage;
+	private JLabel lbBoardBackround;
 
 	public GameGUI(final ClientModel clientModel, ClientGUI clientGUI) {
 		this.clientModel = clientModel;
@@ -69,7 +75,7 @@ public class GameGUI {
 	
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 611, 532);
+		frame.setBounds(100, 100, 894, 758);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
 		
@@ -80,7 +86,7 @@ public class GameGUI {
 		gbl_gamePanel.columnWeights = new double[]{0.0, 1.0};
 		gamePanel.setLayout(gbl_gamePanel);	
 		
-		board = new JPanel(new GridLayout(0, 9));
+		board = new BoardJPanel(new GridLayout(0, 9));
 		board.setBorder(new CompoundBorder(
                 new EmptyBorder(8,8,8,8),
                 new LineBorder(Color.BLACK)
@@ -92,6 +98,7 @@ public class GameGUI {
 		gamePanel.add(board, gbc_board);
 		
 		textAreaMessages = new JTextArea();
+		textAreaMessages.setEditable(false);
 		GridBagConstraints gbc_textAreaMessages = new GridBagConstraints();
 		gbc_textAreaMessages.insets = new Insets(0, 0, 5, 0);
 		gbc_textAreaMessages.fill = GridBagConstraints.BOTH;
