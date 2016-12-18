@@ -13,5 +13,6 @@ public enum Type {
 	LOGOUT,
 	NEWGAME,
 	PASS,
-	LEAVEQUEUE
+	LEAVEQUEUE,
+	STARTGAME
 }

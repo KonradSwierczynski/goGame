@@ -21,6 +21,8 @@ GAMEOVER:
 	"GMOwinner:loser" (jako username)
 PASS:
 	"PASusername"
+STARTGAME:
+	"SGMgameSize:opponent:color" ("SGM19:bartek:1")
 	
 
 <!------------------------ użycia ------------------------->

@@ -23,6 +23,7 @@ public class ClientThread extends Thread{
 	private Account account = null;
 	private MyState myState = null;
 	private int gameSize;
+	private GameThread currentGame = null;
 	
 	public ClientThread(Socket clientSocket)
 	{
@@ -68,12 +69,16 @@ public class ClientThread extends Thread{
 	 * @param line input line
 	 * @return request Request Accept/Deny to inform player about action outcome
 	 */
-	Request proceedAction(String line)
+	public Request proceedAction(String line)
 	{
 		Request request = Protocol.getRequest(line);
 		Request outRequest = null;
 		switch(request.getType())
 		{
+		case STARTGAME:
+			outRequest = myState.StartGame(this, request.getValue());
+			log(this.clientSocket,myState.toString());
+			break;
 		case LEAVEQUEUE:
 			outRequest = myState.QuitQueue(this);
 			log(this.clientSocket,myState.toString());
@@ -83,6 +88,7 @@ public class ClientThread extends Thread{
 			break;
 		case NEWGAME:
 			outRequest = myState.PlayGame(this, request.getValue());
+			Server.getInstance().checkQueue(this, this.getGameSize());
 			log(this.clientSocket,myState.toString());
 			break;
 		case ACCEPT:
@@ -137,6 +143,10 @@ public class ClientThread extends Thread{
 		return this.myState;
 	}
 
+	public void setGame(GameThread game)
+	{
+		this.currentGame = game;
+	}
 
 	public Account getAccount() {
 		return account;
@@ -152,6 +162,10 @@ public class ClientThread extends Thread{
 		return this.gameSize;
 	}
 
+	public void sendToClient(String input)
+	{
+		out.println(input);
+	}
 
 	public void setAccount(Account account) {
 		this.account = account;

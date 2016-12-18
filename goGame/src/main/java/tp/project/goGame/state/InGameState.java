@@ -69,4 +69,10 @@ public class InGameState implements MyState{
 		return "InGameState";
 	}
 
+	@Override
+	public Request StartGame(ClientThread client, String input) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

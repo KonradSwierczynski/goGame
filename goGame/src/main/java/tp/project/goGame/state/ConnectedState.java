@@ -92,4 +92,10 @@ public class ConnectedState implements MyState {
 		return "ConnectedState";
 	}
 
+	@Override
+	public Request StartGame(ClientThread client, String input) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

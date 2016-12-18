@@ -7,6 +7,9 @@ public class Protocol {
 		Request out = null;
 		switch(str)
 		{
+		case "SGM":
+			out = new Request(Type.STARTGAME,value.substring(3));
+			break;
 		case "LQU":
 			out = new Request(Type.LEAVEQUEUE,value.substring(3));
 			break;
@@ -59,6 +62,9 @@ public class Protocol {
 		
 		switch(request.getType())
 		{
+		case STARTGAME:
+			out = "SGM" + request.getValue();
+			break;
 		case LEAVEQUEUE:
 			out = "LQU" + request.getValue();
 			break;
@@ -123,7 +129,6 @@ public class Protocol {
 		String nickname = line;
 		
 		Account out = new Account(username,password,nickname,email);
-		System.out.println(out.toString());
 		
 		return out;
 	}

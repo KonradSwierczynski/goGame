@@ -71,4 +71,23 @@ public class InQueueState implements MyState {
 		return "InQueueState";
 	}
 
+	@Override
+	public Request StartGame(ClientThread client, String input) {
+		int i;
+		String input2 = input;
+		i=input.indexOf(':');
+		int size = Integer.parseInt(input.substring(0, i));
+		input = input.substring(i+1);
+		
+		i=input.indexOf(':');
+		String nicknameOpponent = input.substring(0, i);
+		input = input.substring(i+1);
+		
+		int color = Integer.parseInt(input);
+		
+		client.changeState(new InGameState());
+		
+		return new Request(Type.STARTGAME,input2);
+	}
+
 }

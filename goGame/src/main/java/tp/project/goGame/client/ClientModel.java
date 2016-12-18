@@ -121,6 +121,21 @@ public class ClientModel {
 			Request input = Protocol.getRequest(line);
 			switch(input.getType())
 			{
+			case STARTGAME:
+				int i;
+				String input2 = input.getValue();
+				i=input2.indexOf(':');
+				int size = Integer.parseInt(input2.substring(0, i));
+				input2 = input2.substring(i+1);
+				
+				i=input2.indexOf(':');
+				String nicknameOpponent = input2.substring(0, i);
+				input2 = input2.substring(i+1);
+				
+				int color = Integer.parseInt(input2);
+				
+				JOptionPane.showMessageDialog(gui.getFrame(), size + nicknameOpponent + color);
+				break;
 			case LEAVEQUEUE:
 				gui.showNewGame();
 				break;

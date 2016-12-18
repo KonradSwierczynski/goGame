@@ -70,4 +70,10 @@ public class LoggedInState implements MyState {
 		return "LoggedInstate";
 	}
 
+	@Override
+	public Request StartGame(ClientThread client, String input) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

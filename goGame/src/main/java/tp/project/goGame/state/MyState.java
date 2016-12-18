@@ -13,6 +13,7 @@ public interface MyState {
 	public Request Register(String input) throws AccountExistsException;
 	public Request LogOut(ClientThread client);
 	public Request PlayGame(ClientThread client, String input);
+	public Request StartGame(ClientThread client, String input);
 	public Request SendMesage(String input);
 	public Request MakeMove(GameThread gameThread,String input);
 	public Request QuitGame(ClientThread client);

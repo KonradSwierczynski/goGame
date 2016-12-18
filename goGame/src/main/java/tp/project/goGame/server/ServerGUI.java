@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import java.awt.ScrollPane;
 
 public class ServerGUI {
 
@@ -18,11 +21,15 @@ public class ServerGUI {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.setVisible(true);
 		
 		logArea = new JTextArea();
 		logArea.setBounds(10, 49, 347, 202);
 		frame.getContentPane().add(logArea);
+		
+		
+		
+		
+		frame.setVisible(true);	
 	}
 	
 	public void addLog(String message)
