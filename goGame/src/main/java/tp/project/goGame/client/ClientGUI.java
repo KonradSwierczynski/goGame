@@ -285,10 +285,6 @@ public class ClientGUI implements ActionListener {
         });
 	}
 	
-	private void startGame() {
-		GameGUI game = new GameGUI(this.clientModel, this);
-	}
-	
 	public JFrame getFrame()
 	{
 		return frame;

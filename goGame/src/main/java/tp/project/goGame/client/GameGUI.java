@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
@@ -56,6 +57,10 @@ public class GameGUI {
 	private ClientModel clientModel;
 	private ClientGUI clientGUI;
 	private Board boardGame;
+	
+	private int size;
+	private String opponentNick;
+	private int myColor;
 
 	private JFrame frame;
 	private JPanel board;
@@ -67,9 +72,12 @@ public class GameGUI {
 	private JTextField textFieldNewMessage;
 	private JLabel lbBoardBackround;
 
-	public GameGUI(final ClientModel clientModel, ClientGUI clientGUI) {
+	public GameGUI(final ClientModel clientModel, ClientGUI clientGUI, String opponentNick, int myColor, int size) {
 		this.clientModel = clientModel;
 		this.clientGUI = clientGUI;
+		this.opponentNick = opponentNick;
+		this.myColor = myColor;
+		this.size = size;
 		clientGUI.getFrame().setVisible(false);
 		initialize();
 		frame.setVisible(true);
@@ -172,6 +180,33 @@ public class GameGUI {
 	    }
 	}
 	
+	public void reciveMessage(String message) {
+		this.textAreaMessages.append("\n>" + message);
+	}
+	
+	public void updateBoard(String boardString) {
+		boardGame.restoreBoard(boardString);
+		int position = 0;
+		for(int i = 0; i < boardGame.getIntSize(); i++) {
+			for(int j = 0; j < boardGame.getIntSize(); j++) {
+				int colorOfPosition = Character.getNumericValue(boardString.charAt(position));
+				//boardSquares[i][j].setIcon();
+				position += 2;
+			}
+			position += 1;
+		}
+	}
+	
+	public void gameOver(boolean win) {
+		if(win)
+			JOptionPane.showMessageDialog(frame, "You won");
+		else
+			JOptionPane.showMessageDialog(frame, opponentNick + " won");
+		
+		frame.setVisible(false);
+		clientGUI.getFrame().setVisible(true);
+	}
+	
 	private void sendMessage() {
 		Request request = new Request(Type.MESSAGE, textFieldNewMessage.getText());
 		clientModel.sendToServer(Protocol.getMessage(request));
@@ -191,19 +226,6 @@ public class GameGUI {
 	private void exitGame() {
 		Request request = new Request(Type.GAMEOVER, clientModel.getNickname());
 		clientModel.sendToServer(Protocol.getMessage(request));
-	}
-	
-	public void updateBoard(String boardString) {
-		boardGame.restoreBoard(boardString);
-		int position = 0;
-		for(int i = 0; i < boardGame.getIntSize(); i++) {
-			for(int j = 0; j < boardGame.getIntSize(); j++) {
-				int colorOfPosition = Character.getNumericValue(boardString.charAt(position));
-				//boardSquares[i][j].setIcon();
-				position += 2;
-			}
-			position += 1;
-		}
 	}
 	
 }

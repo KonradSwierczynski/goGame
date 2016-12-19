@@ -34,6 +34,7 @@ public class ClientModel {
 	private PrintWriter out = null;
 	private String nickname = null;
 	private ClientGUI gui = null;
+	private GameGUI gameGui = null;
 	private int gameSize;
 	private int myColor;
 	
@@ -141,6 +142,8 @@ public class ClientModel {
 				int color = Integer.parseInt(input2);
 				
 				JOptionPane.showMessageDialog(gui.getFrame(), size + nicknameOpponent + color);
+				
+				startNewGame(size, color, nicknameOpponent);
 				break;
 			case LEAVEQUEUE:
 				gui.showNewGame();
@@ -168,6 +171,10 @@ public class ClientModel {
 			case EXIT:
 				break;
 			case GAMEOVER:
+				String input3 = input.getValue();
+				String winner = input3.substring(0, input3.indexOf(':'));
+				boolean win = nickname.equals(winner);
+				gameGui.gameOver(win);
 				break;
 			case LOGIN:
 				nickname = input.getValue();
@@ -175,9 +182,11 @@ public class ClientModel {
 				gui.showLogged();
 				break;
 			case MESSAGE:
+				gameGui.reciveMessage(input.getValue());
 				JOptionPane.showMessageDialog(gui.getFrame(), input.getValue());
 				break;
 			case MOVE:
+				gameGui.updateBoard(input.getValue());
 				break;
 			case REGISTER:
 				JOptionPane.showMessageDialog(gui.getFrame(), "You've registered correctly!");
@@ -193,6 +202,11 @@ public class ClientModel {
 			
 			}
 		}
+	}
+
+	public void startNewGame(int size, int color, String nicknameOpponent) {
+		myColor = color;
+		this.gameGui = new GameGUI(this, gui, nicknameOpponent, myColor, size);	
 	}
 	
 	
