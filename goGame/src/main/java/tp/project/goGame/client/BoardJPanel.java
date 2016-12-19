@@ -1,5 +1,6 @@
 package tp.project.goGame.client;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -19,6 +20,8 @@ public class BoardJPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
+		this.setBackground(Color.GRAY); //TODO Implement some real image backgound
+		/*
 		try {
 			File pathToFile = new File("/goGame/resources/images/board9X9.png");
 			Image image = ImageIO.read(pathToFile);
@@ -26,5 +29,6 @@ public class BoardJPanel extends JPanel {
 		} catch (IOException ex) {
 		    ex.printStackTrace();
 		}
+		*/
 	}
 }

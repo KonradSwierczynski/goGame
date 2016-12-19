@@ -190,7 +190,21 @@ public class GameGUI {
 		for(int i = 0; i < boardGame.getIntSize(); i++) {
 			for(int j = 0; j < boardGame.getIntSize(); j++) {
 				int colorOfPosition = Character.getNumericValue(boardString.charAt(position));
-				//boardSquares[i][j].setIcon();
+				if(colorOfPosition != 0) {
+					try {
+						Image img;
+						if(colorOfPosition == 1) {
+							//img = ImageIO.read(getClass().getResource("resources/images/blackStone.bmp")); //TODO Read black stone image
+						    boardSquares[i][j].setBackground(Color.BLACK);
+						} else {
+							//img = ImageIO.read(getClass().getResource("resources/images/whiteStone.bmp")); //TODO Read white stone image
+						    boardSquares[i][j].setBackground(Color.WHITE);
+						}
+					    //boardSquares[i][j].setIcon(new ImageIcon(img));
+					 } catch (Exception ex) {
+					    System.out.println(ex);
+					 }
+				}
 				position += 2;
 			}
 			position += 1;
