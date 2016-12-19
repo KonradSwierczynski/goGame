@@ -22,6 +22,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import tp.project.goGame.shared.Board;
 import tp.project.goGame.shared.GameSize;
 import tp.project.goGame.shared.Protocol;
 import tp.project.goGame.shared.Request;
@@ -54,6 +55,7 @@ public class GameGUI {
 
 	private ClientModel clientModel;
 	private ClientGUI clientGUI;
+	private Board boardGame;
 
 	private JFrame frame;
 	private JPanel board;
@@ -171,19 +173,37 @@ public class GameGUI {
 	}
 	
 	private void sendMessage() {
-		
+		Request request = new Request(Type.MESSAGE, textFieldNewMessage.getText());
+		clientModel.sendToServer(Protocol.getMessage(request));
+		textFieldNewMessage.setText("");
 	}
 	
 	private void makeMove(int x, int y) {
 		System.out.println(Integer.toString(x) + " " + Integer.toString(y));
+		clientModel.sendMove(x, y);
 	}
 	
 	private void pass() {
-		
+		Request request = new Request(Type.PASS, clientModel.getNickname());
+		clientModel.sendToServer(Protocol.getMessage(request));
 	}
 	
 	private void exitGame() {
-		
+		Request request = new Request(Type.GAMEOVER, clientModel.getNickname());
+		clientModel.sendToServer(Protocol.getMessage(request));
+	}
+	
+	public void updateBoard(String boardString) {
+		boardGame.restoreBoard(boardString);
+		int position = 0;
+		for(int i = 0; i < boardGame.getIntSize(); i++) {
+			for(int j = 0; j < boardGame.getIntSize(); j++) {
+				int colorOfPosition = Character.getNumericValue(boardString.charAt(position));
+				//boardSquares[i][j].setIcon();
+				position += 2;
+			}
+			position += 1;
+		}
 	}
 	
 }

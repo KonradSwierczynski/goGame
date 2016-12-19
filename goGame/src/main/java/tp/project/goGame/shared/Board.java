@@ -28,6 +28,11 @@ public class Board {
 	}
 	
 	public void makeMove(int x, int y, int color) throws WrongMoveException {
+		
+		if(checkFreePositions()) {
+			throw new WrongMoveException("No more free positions");
+		}
+		
 		if(!isInBoard(x, y))
 			throw new WrongMoveException("Wrong position");
 		if(board[x][y] != 0)
@@ -52,8 +57,25 @@ public class Board {
 		
 		previousBoard = tmp;
 		currentRoundColor = opponentColor(color);
+		
 	}
 	
+	private boolean checkFreePositions() {
+		boolean noFreePositions = true;
+		
+		for(int i = 0; i < size; i++)
+		{
+			for(int j = 0; j < size; j++)
+			{
+				if(board[i][j] == 0) {
+					noFreePositions = false;
+				}
+			}
+		}
+		
+		return noFreePositions;
+	}
+
 	private int opponentColor(int color) {
 		if( color == 1 || color == 2) {
 			return (2 - color/2);
@@ -144,9 +166,27 @@ public class Board {
 		return 0 <= x && x < size && 0 <= y && y < size;
 	}
 
-	@Override
-	public String toString() {
-		return null;	
+	public String getBoard() {
+		String boardString = "";
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				boardString += Integer.toString(board[i][j]) + ":";
+			}
+			boardString += ":";
+		}
+		
+		return boardString;
 	}
-
+	
+	public void restoreBoard(String boardString) {
+		int position = 0;
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				board[i][j] = Character.getNumericValue(boardString.charAt(position));
+				position += 2;
+			}
+			position += 1;
+		}
+	}
+	
 }
