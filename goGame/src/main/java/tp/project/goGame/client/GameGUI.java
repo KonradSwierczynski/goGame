@@ -181,7 +181,7 @@ public class GameGUI {
 	}
 	
 	public void reciveMessage(String message) {
-		this.textAreaMessages.append("\n>" + message);
+		this.textAreaMessages.append(message);
 	}
 	
 	public void updateBoard(String boardString) {
@@ -222,7 +222,7 @@ public class GameGUI {
 	}
 	
 	private void sendMessage() {
-		Request request = new Request(Type.MESSAGE, textFieldNewMessage.getText());
+		Request request = new Request(Type.MESSAGE, clientModel.getNickname() + ">" + textFieldNewMessage.getText());
 		clientModel.sendToServer(Protocol.getMessage(request));
 		textFieldNewMessage.setText("");
 	}

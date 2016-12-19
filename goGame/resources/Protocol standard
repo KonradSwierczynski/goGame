@@ -17,6 +17,9 @@ DENY:
 
 MOVE:
 	"MOVx:y:color" (color: w/c)
+	
+MOVE: odebrane
+	"MOVa1:a2:a3:...a19::b1:b...::
 GAMEOVER:
 	"GMOwinner:loser" (jako username)
 PASS:
