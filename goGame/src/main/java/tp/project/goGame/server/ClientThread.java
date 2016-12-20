@@ -110,6 +110,7 @@ public class ClientThread extends Thread{
 			break;
 		case MESSAGE:
 			outRequest = new Request(Type.MESSAGE,request.getValue());
+			this.currentGame.sendToClients(this, Protocol.getMessage(outRequest));
 			break;
 		case EXIT:
 			outRequest = new Request(Type.EXIT,"bye");

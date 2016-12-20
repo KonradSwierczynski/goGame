@@ -75,6 +75,9 @@ public class Server {
 				temp = new_one.proceedAction("SGM"+ct.getGameSize()+":"+ct.getAccount().getNickname()+":"+"2");
 				new_one.sendToClient(Protocol.getMessage(temp));
 				
+				new_one.setGame(game);
+				ct.setGame(game);
+				
 				break;
 			}
 		}

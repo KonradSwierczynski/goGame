@@ -94,9 +94,9 @@ public class ClientGUI implements ActionListener {
 		JButton btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				clientModel.startNewGame(19, 1, "debug");
-				//Request temp =  new Request(Type.LOGIN,usernameField.getText()+":"+passwordField.getText()+"::");
-				//clientModel.sendToServer(Protocol.getMessage(temp));
+				//clientModel.startNewGame(19, 1, "debug");
+				Request temp =  new Request(Type.LOGIN,usernameField.getText()+":"+passwordField.getText()+"::");
+				clientModel.sendToServer(Protocol.getMessage(temp));
 			}
 		});
 		btnLogIn.setBounds(49, 164, 89, 23);
