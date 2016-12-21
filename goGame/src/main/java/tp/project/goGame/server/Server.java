@@ -69,10 +69,10 @@ public class Server {
 			{
 				GameThread game = new GameThread(new_one,ct,ct.getGameSize());
 				
-				Request temp = ct.proceedAction("SGM"+ct.getGameSize()+":"+new_one.getAccount().getNickname()+":"+"1");
+				Request temp = ct.proceedAction("SGM"+ct.getGameSize()+":"+new_one.getAccount().getNickname()+":"+"2");
 				ct.sendToClient(Protocol.getMessage(temp));
 				
-				temp = new_one.proceedAction("SGM"+ct.getGameSize()+":"+ct.getAccount().getNickname()+":"+"2");
+				temp = new_one.proceedAction("SGM"+ct.getGameSize()+":"+ct.getAccount().getNickname()+":"+"1");
 				new_one.sendToClient(Protocol.getMessage(temp));
 				
 				new_one.setGame(game);

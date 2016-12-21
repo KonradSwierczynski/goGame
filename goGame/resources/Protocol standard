@@ -16,7 +16,7 @@ DENY:
 <!------------------------ nowe --------------------------->
 
 MOVE:
-	"MOVx:y:color" (color: w/c)
+	"MOVx:y:color" (color: 1/2)
 	
 MOVE: odebrane
 	"MOVa1:a2:a3:...a19::b1:b...::

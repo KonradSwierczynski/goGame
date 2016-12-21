@@ -71,6 +71,8 @@ public class GameGUI {
 	private JTextArea textAreaMessages;
 	private JTextField textFieldNewMessage;
 	private JLabel lbBoardBackround;
+	
+	private boolean myTurn = true;
 
 	public GameGUI(final ClientModel clientModel, ClientGUI clientGUI, String opponentNick, int myColor, int size) {
 		this.clientModel = clientModel;
@@ -81,6 +83,11 @@ public class GameGUI {
 		clientGUI.getFrame().setVisible(false);
 		initialize();
 		frame.setVisible(true);
+		
+		if(myColor == 1)
+			myTurn = true;
+		else
+			myTurn = false;
 	}
 	
 	private void initialize() {
@@ -119,7 +126,10 @@ public class GameGUI {
 		btnPass = new JButton("Pass");
 		btnPass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				pass();
+				if(myTurn)
+					pass();
+				else
+					JOptionPane.showMessageDialog(frame, "Wait for your turn");
 			}
 		});
 		GridBagConstraints gbc_btnPass = new GridBagConstraints();
@@ -171,7 +181,10 @@ public class GameGUI {
                 button.setIcon(icon);
 	     		button.addActionListener(new ActionListener() {
 	    			public void actionPerformed(ActionEvent arg0) {
-	    				makeMove(((PlainJButton) arg0.getSource()).getX(), ((PlainJButton) arg0.getSource()).getY());
+	    				if(myTurn)
+	    					makeMove(((PlainJButton) arg0.getSource()).getX(), ((PlainJButton) arg0.getSource()).getY());
+	    				else
+	    					JOptionPane.showMessageDialog(frame, "Wait for your turn");
 	    			}
 	    		});
 	     		boardSquares[j][i] = button;
@@ -240,6 +253,11 @@ public class GameGUI {
 	private void exitGame() {
 		Request request = new Request(Type.GAMEOVER, clientModel.getNickname());
 		clientModel.sendToServer(Protocol.getMessage(request));
+	}
+	
+	public void nextTurn()
+	{
+		myTurn = !myTurn;
 	}
 	
 }

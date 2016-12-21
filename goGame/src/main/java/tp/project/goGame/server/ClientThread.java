@@ -98,6 +98,20 @@ public class ClientThread extends Thread{
 		case GAMEOVER:
 			break;
 		case MOVE:
+			String input = request.getValue();
+			int i;
+			
+			i=input.indexOf(':');
+			int x = Integer.parseInt(input.substring(0, i));
+			input = input.substring(i+1);
+			
+			i=input.indexOf(':');
+			int y = Integer.parseInt(input.substring(0, i));
+			input = input.substring(i+1);
+			
+			int color = Integer.parseInt(input);
+			
+			outRequest = currentGame.makeMove(this, x, y, color);
 			break;
 		case WARNING:
 			break;

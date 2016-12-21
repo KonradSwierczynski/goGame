@@ -149,7 +149,7 @@ public class ClientModel {
 				gui.showNewGame();
 				break;
 			case PASS:
-				
+				gameGui.nextTurn();
 				break;
 			case NEWGAME:
 				String mode = input.getValue().substring(0, 3);
@@ -187,6 +187,7 @@ public class ClientModel {
 				break;
 			case MOVE:
 				gameGui.updateBoard(input.getValue());
+				gameGui.nextTurn();
 				break;
 			case REGISTER:
 				JOptionPane.showMessageDialog(gui.getFrame(), "You've registered correctly!");
