@@ -65,7 +65,7 @@ public class GameGUI {
 
 	private JFrame frame;
 	private JPanel board;
-	private PlainJButton[][] boardSquares = new PlainJButton[9][9];
+	private PlainJButton[][] boardSquares;
 	private JButton btnPass;
 	private JButton btnExit;
 	private JButton btnSendMessage;
@@ -81,6 +81,7 @@ public class GameGUI {
 		this.opponentNick = opponentNick;
 		this.myColor = myColor;
 		this.size = size;
+		this.boardSquares = new PlainJButton[size][size];
 		clientGUI.getFrame().setVisible(false);
 		initialize();
 		frame.setVisible(true);
@@ -93,7 +94,7 @@ public class GameGUI {
 	
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 894, 758);
+		frame.setBounds(100, 100, 1200, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
 		
@@ -104,11 +105,13 @@ public class GameGUI {
 		gbl_gamePanel.columnWeights = new double[]{0.0, 1.0};
 		gamePanel.setLayout(gbl_gamePanel);	
 		
-		board = new BoardJPanel(new GridLayout(0, 9));
+		board = new BoardJPanel(new GridLayout(0, size), size);
+		/*
 		board.setBorder(new CompoundBorder(
                 new EmptyBorder(8,8,8,8),
                 new LineBorder(Color.BLACK)
                 ));
+                */
 		GridBagConstraints gbc_board = new GridBagConstraints();
 		gbc_board.insets = new Insets(0, 0, 5, 5);
 		gbc_board.gridx = 0;
@@ -175,10 +178,10 @@ public class GameGUI {
 	    for (int i = 0; i < boardSquares.length; i++) {
 	    	for (int j = 0; j < boardSquares[i].length; j++) {
 	     		PlainJButton button = new PlainJButton(j, i);
-	     		//button.setMargin(buttonMargin);
-	     		button.setSize(65, 65);
+	     		button.setMargin(buttonMargin);
+	     		button.setSize(40, 40);
 	     		ImageIcon icon = new ImageIcon(
-                        new BufferedImage(65, 65, BufferedImage.TYPE_INT_ARGB));
+                      new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB));
                 button.setIcon(icon);
 	     		button.addActionListener(new ActionListener() {
 	    			public void actionPerformed(ActionEvent arg0) {
@@ -204,21 +207,7 @@ public class GameGUI {
 		for(int i = 0; i < boardGame.getIntSize(); i++) {
 			for(int j = 0; j < boardGame.getIntSize(); j++) {
 				int colorOfPosition = Character.getNumericValue(boardString.charAt(position));
-				if(colorOfPosition != 0) {
-					try {
-						Image img;
-						if(colorOfPosition == 1) {
-							//img = ImageIO.read(getClass().getResource("resources/images/blackStone.bmp")); //TODO Read black stone image
-						    boardSquares[i][j].setBackground(Color.BLACK);
-						} else {
-							//img = ImageIO.read(getClass().getResource("resources/images/whiteStone.bmp")); //TODO Read white stone image
-						    boardSquares[i][j].setBackground(Color.WHITE);
-						}
-					    //boardSquares[i][j].setIcon(new ImageIcon(img));
-					 } catch (Exception ex) {
-					    System.out.println(ex);
-					 }
-				}
+				boardSquares[i][j].setStone(colorOfPosition);
 				position += 2;
 			}
 			position += 1;
@@ -250,6 +239,8 @@ public class GameGUI {
 	private void makeMove(int x, int y) {
 		System.out.println(Integer.toString(x) + " " + Integer.toString(y));
 		clientModel.sendMove(x, y);
+		//Request request = new Request(Type.MOVE, Integer.toString(x) + ":" + Integer.toString(y) + ":" + Integer.toString(myColor));
+		//clientModel.sendToServer(Protocol.getMessage(request));
 	}
 	
 	private void pass() {

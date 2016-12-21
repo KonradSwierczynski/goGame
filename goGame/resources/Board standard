@@ -12,6 +12,8 @@ Sizes of board in GameSize enum
 new Board(gameSize : GameSize) <- to create new board pass only gameSize
 
 MakeMove(x : int, y : int, color : int) <- to make move, pass position and color of new added stone
+
+Pass(color : int) <- to pass(2 passes in a row ends game)
 	
 getBoard() <- returns actual board int String
 	format: color:color:...::color:color...		:: means new row

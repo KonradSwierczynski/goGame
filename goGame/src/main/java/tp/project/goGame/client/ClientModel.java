@@ -95,6 +95,11 @@ public class ClientModel {
 		sendToServer(Protocol.getMessage(request));
 	}
 	
+	public void startNewGame(int size, int color, String nicknameOpponent) {
+		myColor = color;
+		this.gameGui = new GameGUI(this, gui, nicknameOpponent, myColor, size);	
+	}
+	
 	class ListenFromServer extends Thread
 	{
 		public void run()
@@ -227,12 +232,4 @@ public class ClientModel {
 			}
 		}
 	}
-
-	public void startNewGame(int size, int color, String nicknameOpponent) {
-		myColor = color;
-		this.gameGui = new GameGUI(this, gui, nicknameOpponent, myColor, size);	
-	}
-	
-	
-	
 }
