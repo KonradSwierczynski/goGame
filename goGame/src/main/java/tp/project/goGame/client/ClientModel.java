@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import tp.project.goGame.server.Server;
 import tp.project.goGame.shared.Account;
 import tp.project.goGame.shared.Protocol;
 import tp.project.goGame.shared.Request;
@@ -126,8 +127,25 @@ public class ClientModel {
 		void proceedAction(String line)
 		{
 			Request input = Protocol.getRequest(line);
+			Request out;
 			switch(input.getType())
 			{
+			case ENDGAMEPROMPT:
+				//block gui
+				int result = gameGui.endGamePrompt(); 
+				if(result>0)
+				{
+					Server.getInstance();
+					Server.log("Result: " + result);
+					out = new Request(Type.ACCEPT,"");
+				}else
+				{
+					Server.getInstance();
+					Server.log("Result: " + result);
+					out = new Request(Type.DENY,nickname + " denied.");
+				}
+				sendToServer(Protocol.getMessage(out));
+				break;
 			case STARTGAME:
 				int i;
 				String input2 = input.getValue();
@@ -150,6 +168,7 @@ public class ClientModel {
 				break;
 			case PASS:
 				gameGui.nextTurn();
+				JOptionPane.showMessageDialog(gameGui.getFrame(), input.getValue() + " passed." );
 				break;
 			case NEWGAME:
 				String mode = input.getValue().substring(0, 3);
@@ -163,6 +182,10 @@ public class ClientModel {
 			case ACCEPT:
 				break;
 			case DENY:
+				if(input.getValue().equals("EGP"))
+				{
+					//enable gui
+				}
 				JOptionPane.showMessageDialog(gui.getFrame(),
 					    input.getValue(),
 					    "Error",

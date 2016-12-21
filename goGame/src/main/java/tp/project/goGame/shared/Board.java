@@ -11,6 +11,7 @@ public class Board {
 	private int currentRoundColor;
 	private GameSize gameSize;
 	private int size;
+	private String currentLeader;
 	
 	public Board(GameSize gameSize) {
 		this.board = new int[gameSize.getValue()][gameSize.getValue()];
@@ -187,6 +188,11 @@ public class Board {
 			}
 			position += 1;
 		}
+	}
+	
+	public String getWinner()
+	{
+		return currentLeader;
 	}
 	
 }

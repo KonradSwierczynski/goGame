@@ -53,12 +53,6 @@ public class InQueueState implements MyState {
 	}
 
 	@Override
-	public Request QuitGame(ClientThread client) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Request QuitQueue(ClientThread client) {
 		Request temp = new Request(Type.LEAVEQUEUE,"leave");
 		client.changeState(new LoggedInState());
@@ -77,6 +71,8 @@ public class InQueueState implements MyState {
 		String input2 = input;
 		i=input.indexOf(':');
 		int size = Integer.parseInt(input.substring(0, i));
+		client.setGameSize(size);
+		
 		input = input.substring(i+1);
 		
 		i=input.indexOf(':');
@@ -88,6 +84,12 @@ public class InQueueState implements MyState {
 		client.changeState(new InGameState());
 		
 		return new Request(Type.STARTGAME,input2);
+	}
+
+	@Override
+	public Request QuitGame(ClientThread client, String winner) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

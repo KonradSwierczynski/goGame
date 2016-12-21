@@ -86,7 +86,10 @@ public class Server {
 	@SuppressWarnings("unused")
 	public static void log(String message)
 	{
-		gui.addLog(message);
+		if(message.equals(null))
+			gui.addLog("Null message");
+		else
+			gui.addLog(message);
 	}
 	
 	@SuppressWarnings("unused")

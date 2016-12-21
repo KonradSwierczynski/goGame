@@ -7,6 +7,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import java.awt.ScrollPane;
+import java.awt.Font;
 
 public class ServerGUI {
 
@@ -18,12 +19,13 @@ public class ServerGUI {
 	 */
 	public ServerGUI() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 449, 440);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		logArea = new JTextArea();
-		logArea.setBounds(10, 49, 347, 202);
+		logArea.setFont(new Font("Monospaced", Font.PLAIN, 7));
+		logArea.setBounds(10, 49, 347, 341);
 		frame.getContentPane().add(logArea);
 		
 		

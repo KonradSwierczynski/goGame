@@ -84,7 +84,7 @@ public class ClientThread extends Thread{
 			log(this.clientSocket,myState.toString());
 			break;
 		case PASS:
-			
+			outRequest = currentGame.makePass(this);
 			break;
 		case NEWGAME:
 			outRequest = myState.PlayGame(this, request.getValue());
@@ -92,10 +92,21 @@ public class ClientThread extends Thread{
 			log(this.clientSocket,myState.toString());
 			break;
 		case ACCEPT:
+			if(!currentGame.acceptEGP(this))
+				outRequest = new Request(Type.MESSAGE,"waiting for player2 to accept");
+			else
+			{
+				outRequest = new Request(Type.GAMEOVER,currentGame.getWinner());
+				currentGame.sendToClients(this, Protocol.getMessage(outRequest));
+			}
 			break;
 		case DENY:
+			outRequest = new Request(Type.DENY,"EGP");
+			this.currentGame.sendToClients(this, Protocol.getMessage(outRequest));
+			this.currentGame.denyCase();
 			break;
 		case GAMEOVER:
+			outRequest = myState.QuitGame(this,request.getValue());
 			break;
 		case MOVE:
 			String input = request.getValue();
@@ -161,6 +172,11 @@ public class ClientThread extends Thread{
 	public void setGame(GameThread game)
 	{
 		this.currentGame = game;
+	}
+	
+	public GameThread getGame()
+	{
+		return this.currentGame;
 	}
 
 	public Account getAccount() {

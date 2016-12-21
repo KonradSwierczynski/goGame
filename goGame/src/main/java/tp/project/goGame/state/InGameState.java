@@ -6,6 +6,7 @@ import exceptions.WrongPasswordException;
 import tp.project.goGame.server.ClientThread;
 import tp.project.goGame.server.GameThread;
 import tp.project.goGame.shared.Request;
+import tp.project.goGame.shared.Type;
 
 public class InGameState implements MyState{
 
@@ -52,9 +53,9 @@ public class InGameState implements MyState{
 	}
 
 	@Override
-	public Request QuitGame(ClientThread client) {
-		// TODO Auto-generated method stub
-		return null;
+	public Request QuitGame(ClientThread client, String winner) {
+		client.changeState(new LoggedInState());
+		return new Request(Type.GAMEOVER,winner);
 	}
 
 	@Override

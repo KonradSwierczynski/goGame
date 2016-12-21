@@ -7,6 +7,9 @@ public class Protocol {
 		Request out = null;
 		switch(str)
 		{
+		case "EGP":
+			out = new Request(Type.ENDGAMEPROMPT,value.substring(3));
+			break;
 		case "SGM":
 			out = new Request(Type.STARTGAME,value.substring(3));
 			break;
@@ -62,6 +65,9 @@ public class Protocol {
 		
 		switch(request.getType())
 		{
+		case ENDGAMEPROMPT:
+			out = "EGP" + request.getValue();
+			break;
 		case STARTGAME:
 			out = "SGM" + request.getValue();
 			break;

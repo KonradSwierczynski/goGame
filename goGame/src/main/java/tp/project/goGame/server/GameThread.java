@@ -11,6 +11,8 @@ public class GameThread {
 	ClientThread player1,player2 = null;
 	int gameSize;
 	Board board = null;
+	int passCount = 0;
+	boolean acc1,acc2 = false;
 	/*
 	 * player1 is 1(black), player2 is 2(white)
 	 */
@@ -33,19 +35,70 @@ public class GameThread {
 		}
 	}
 	
+	public void denyCase()
+	{
+		acc2 = acc1 = false;
+	}
+	
+	public synchronized boolean acceptEGP(ClientThread client)
+	{
+		Request temp;
+		if(client.equals(player1))
+		{
+			if(acc2)
+			{
+				temp = new Request(Type.GAMEOVER,board.getWinner());
+				
+				player1.proceedAction(Protocol.getMessage(temp));
+				player2.proceedAction(Protocol.getMessage(temp));
+		
+				return true;
+			}
+			else
+			{
+				acc1 = true;
+				return false;
+			}
+		}else if(client.equals(player2))
+		{
+			if(acc1){
+				temp = new Request(Type.GAMEOVER,board.getWinner());
+				player1.proceedAction(Protocol.getMessage(temp));
+				player2.proceedAction(Protocol.getMessage(temp));
+				return true;
+			}
+			else
+			{
+				acc2=true;
+				return false;
+			}
+		}
+		
+		return false;
+	}
+	
 	public Request makePass(ClientThread from)
 	{
-		Request out = new Request(Type.PASS,"");
+		passCount++;
+		Request out = new Request(Type.PASS,from.getAccount().getNickname());
 		if(from.equals(player1))
 			player2.sendToClient(Protocol.getMessage(out));
 		else
 			player1.sendToClient(Protocol.getMessage(out));
+		
+		if(passCount==2)
+		{
+			Request egp = new Request(Type.ENDGAMEPROMPT,"");
+			player2.sendToClient(Protocol.getMessage(egp));
+			player1.sendToClient(Protocol.getMessage(egp));
+		}
 		
 		return out;
 	}
 	
 	public Request makeMove(ClientThread from, int x, int y,int color)
 	{
+		passCount = 0;
 		Request out;
 		try{
 			if(from.equals(player1))
@@ -75,6 +128,11 @@ public class GameThread {
 			player2.sendToClient(input);
 		else
 			player1.sendToClient(input);
+	}
+	
+	public String getWinner()
+	{
+		return board.getWinner();
 	}
 
 }

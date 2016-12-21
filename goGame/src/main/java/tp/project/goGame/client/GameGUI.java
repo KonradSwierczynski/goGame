@@ -2,6 +2,7 @@ package tp.project.goGame.client;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -231,7 +232,13 @@ public class GameGUI {
 			JOptionPane.showMessageDialog(frame, opponentNick + " won");
 		
 		frame.setVisible(false);
+		frame.dispose();
 		clientGUI.getFrame().setVisible(true);
+	}
+	
+	public int endGamePrompt()
+	{
+		return JOptionPane.showConfirmDialog((Component)null, "End the game?","End game prompt",JOptionPane.YES_NO_OPTION);
 	}
 	
 	private void sendMessage() {
@@ -258,6 +265,11 @@ public class GameGUI {
 	public void nextTurn()
 	{
 		myTurn = !myTurn;
+	}
+	
+	public JFrame getFrame()
+	{
+		return this.frame;
 	}
 	
 }
