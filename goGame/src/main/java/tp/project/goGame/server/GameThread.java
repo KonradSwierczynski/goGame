@@ -116,7 +116,7 @@ public class GameThread {
 			
 		}catch(WrongMoveException e)
 		{
-			return new Request(Type.DENY,"Wrong move!");
+			return new Request(Type.DENY,e.getMessage());
 		}
 		
 		

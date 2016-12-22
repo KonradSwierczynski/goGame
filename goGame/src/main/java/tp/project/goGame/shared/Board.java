@@ -8,12 +8,9 @@ public class Board {
 	
 	private int[][] board;
 	private int[][] previousBoard;
-	private int currentRoundColor;
 	private GameSize gameSize;
 	private int size;
 	private String currentLeader;
-	private int numberOfPassesInRow = 0;
-
 	
 	public Board(GameSize gameSize) {
 		this.board = new int[gameSize.getValue()][gameSize.getValue()];
@@ -30,21 +27,6 @@ public class Board {
 		return size;
 	}
 	
-	public void pass(int color) throws WrongMoveException {
-		if(color != currentRoundColor)
-			throw new WrongMoveException("Wrong player");
-		if(numberOfPassesInRow == 2) {
-			endGame();
-		}
-		currentRoundColor = opponentColor(color);
-		numberOfPassesInRow++;
-	}
-	
-	private void endGame() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void makeMove(int x, int y, int color) throws WrongMoveException {
 		
 		if(checkFreePositions()) {
@@ -55,8 +37,6 @@ public class Board {
 			throw new WrongMoveException("Wrong position");
 		if(board[x][y] != 0)
 			throw new WrongMoveException("Occupied position");
-		if(color != currentRoundColor)
-			throw new WrongMoveException("Wrong player");
 		
 		int[][] tmp = board;
 		board[x][y] = color;
@@ -74,8 +54,6 @@ public class Board {
 		}
 		
 		previousBoard = tmp;
-		currentRoundColor = opponentColor(color);
-		numberOfPassesInRow = 0;
 		
 	}
 	

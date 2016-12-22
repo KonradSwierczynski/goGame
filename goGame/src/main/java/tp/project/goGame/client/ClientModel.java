@@ -35,8 +35,10 @@ public class ClientModel {
 	private PrintWriter out = null;
 	private String nickname = null;
 	private ClientGUI gui = null;
+	
 	private GameGUI gameGui = null;
 	private BoardGUI boardGUI = null;
+	
 	private int gameSize;
 	private int myColor;
 	
@@ -100,7 +102,7 @@ public class ClientModel {
 		myColor = color;
 		gui.getFrame().setVisible(false);
 		//this.gameGui = new GameGUI(this, gui, nicknameOpponent, myColor, size);	
-		boardGUI = new BoardGUI(13);
+		boardGUI = new BoardGUI(this,this.gui,nicknameOpponent,color,size);
 	}
 	
 	class ListenFromServer extends Thread
@@ -175,7 +177,7 @@ public class ClientModel {
 				gui.showNewGame();
 				break;
 			case PASS:
-				gameGui.nextTurn();
+				boardGUI.nextTurn();
 				JOptionPane.showMessageDialog(gameGui.getFrame(), input.getValue() + " passed." );
 				break;
 			case NEWGAME:
@@ -213,12 +215,12 @@ public class ClientModel {
 				gui.showLogged();
 				break;
 			case MESSAGE:
-				gameGui.reciveMessage(input.getValue());
-				JOptionPane.showMessageDialog(gui.getFrame(), input.getValue());
+				boardGUI.reciveMessage(input.getValue());
+				//JOptionPane.showMessageDialog(gui.getFrame(), input.getValue());
 				break;
 			case MOVE:
-				gameGui.updateBoard(input.getValue());
-				gameGui.nextTurn();
+				boardGUI.updateBoard(input.getValue());
+				boardGUI.nextTurn();
 				break;
 			case REGISTER:
 				JOptionPane.showMessageDialog(gui.getFrame(), "You've registered correctly!");

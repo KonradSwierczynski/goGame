@@ -15,10 +15,13 @@ public class Button extends JButton{
 	ImageIcon icon = null;
 	private static int pixelSize;
 	
-	public Button()
+	private int x,y;
+	
+	public Button(int x, int y)
 	{
 		super();
-		this.addActionListener(new myAL());
+		this.x = x;
+		this.y = y;
 		this.setOpaque(false);
 		this.setContentAreaFilled(false);
 		this.setBorderPainted(false);
@@ -45,6 +48,8 @@ public class Button extends JButton{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			System.out.println(icon.getIconWidth()+ " --" +icon.getIconHeight());
 		}
 		this.setOpaque(true);
 		this.setContentAreaFilled(true);
@@ -56,14 +61,19 @@ public class Button extends JButton{
 		this.pixelSize = 360/size;
 	}
 	
-	class myAL implements ActionListener
+	public int getx()
 	{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			setColor(2);
-		}
-		
+		return this.x;
+	}
+	
+	public int gety()
+	{
+		return this.y;
+	}
+	
+	public void addListener(ActionListener AL)
+	{
+		this.addActionListener(AL);
 	}
 	
 }

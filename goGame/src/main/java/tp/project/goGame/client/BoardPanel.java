@@ -23,8 +23,8 @@ public class BoardPanel extends JPanel{
 				img = img.getScaledInstance(360, 360, Image.SCALE_DEFAULT);
 				break;
 			case 19:
-				img = ImageIO.read(new File("resources/images/19x19.png"));
-				img = img.getScaledInstance(360, 360, Image.SCALE_DEFAULT);
+				img = ImageIO.read(new File("resources/images/19x19n.png"));
+				img = img.getScaledInstance(360, 360, Image.SCALE_AREA_AVERAGING);
 				break;
 			}
 		} catch (IOException e) {
