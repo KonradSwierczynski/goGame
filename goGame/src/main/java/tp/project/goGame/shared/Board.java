@@ -5,7 +5,6 @@ import exceptions.WrongMoveException;
 public class Board {
 	
 	public int BLACK = 1, WHITE = 2, EMPTY = 0;
-	
 	private int[][] board;
 	private int[][] previousBoard;
 	private GameSize gameSize;
@@ -38,7 +37,8 @@ public class Board {
 		if(board[x][y] != 0)
 			throw new WrongMoveException("Occupied position");
 		
-		int[][] tmp = board;
+		int[][] tmp = new int[size][size];
+		boardCpy(tmp, board);
 		board[x][y] = color;
 		
 		updateBoard(x, y, color);
@@ -53,10 +53,35 @@ public class Board {
 			throw new WrongMoveException("Wrong move - KO");
 		}
 		
-		previousBoard = tmp;
-		
+		boardCpy(previousBoard, tmp);
+		printBoards();
 	}
 	
+	private void boardCpy(int[][] to, int[][] from) {
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				to[i][j] = from[i][j];
+			}
+		}
+	}
+	
+	private void printBoards() {
+		System.out.println("Board");
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				System.out.print(board[i][j]);
+			}
+			System.out.println("");
+		}
+		System.out.println("Previous Board");
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				System.out.print(this.previousBoard[i][j]);
+			}
+			System.out.println("");
+		}
+	}
+
 	private boolean checkFreePositions() {
 		boolean noFreePositions = true;
 		
@@ -81,17 +106,16 @@ public class Board {
 	}
 	
 	private boolean isKo() {
-		boolean isKo = true;
 		
 		for(int i = 0; i < size; i++) {
 			for(int j = 0; j < size; j++) {
 				if(board[i][j] != previousBoard[i][j]) {
-					isKo = false;
+					return false;
 				}
 			}
 		}
 		
-		return isKo;
+		return true;
 	}
 	
 	private void updateBoard(int x, int y, int color) {
