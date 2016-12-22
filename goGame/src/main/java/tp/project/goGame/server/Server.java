@@ -19,7 +19,7 @@ public class Server {
 	private static Vector<ClientThread> clients = new Vector<ClientThread>();
 	private static Vector<GameThread> games = new Vector<GameThread>();
 	
-	public static Server getInstance(){
+	public synchronized static Server getInstance(){
 		if(instance == null)
 		{
 			synchronized(Server.class)

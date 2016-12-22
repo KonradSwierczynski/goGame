@@ -142,17 +142,13 @@ public class ClientModel {
 			switch(input.getType())
 			{
 			case ENDGAMEPROMPT:
-				//block gui
-				int result = gameGui.endGamePrompt(); 
-				if(result>0)
-				{
-					Server.getInstance();
-					Server.log("Result: " + result);
+				boardGUI.disableGUI();
+				int result = boardGUI.endGamePrompt();
+				if(result == 0)
+				{	
 					out = new Request(Type.ACCEPT,"");
 				}else
 				{
-					Server.getInstance();
-					Server.log("Result: " + result);
 					out = new Request(Type.DENY,nickname + " denied.");
 				}
 				sendToServer(Protocol.getMessage(out));
@@ -170,7 +166,7 @@ public class ClientModel {
 				
 				int color = Integer.parseInt(input2);
 				
-				JOptionPane.showMessageDialog(gui.getFrame(), size + nicknameOpponent + color);
+				//JOptionPane.showMessageDialog(gui.getFrame(), size + nicknameOpponent + color);
 				
 				startNewGame(size, color, nicknameOpponent);
 				break;
@@ -179,7 +175,8 @@ public class ClientModel {
 				break;
 			case PASS:
 				boardGUI.nextTurn();
-				JOptionPane.showMessageDialog(gameGui.getFrame(), input.getValue() + " passed." );
+				if(!input.getValue().equals(nickname))
+					JOptionPane.showMessageDialog(boardGUI.getFrame(), input.getValue() + " passed." );
 				break;
 			case NEWGAME:
 				String mode = input.getValue().substring(0, 3);
@@ -194,13 +191,13 @@ public class ClientModel {
 				break;
 			case DENY:
 				if(input.getValue().equals("EGP"))
-				{
-					//enable gui
-				}
+					boardGUI.enableGUI();
+				else{
 				JOptionPane.showMessageDialog(gui.getFrame(),
 					    input.getValue(),
 					    "Error",
 					    JOptionPane.ERROR_MESSAGE);
+				}
 				break;
 			case EXIT:
 				break;
@@ -208,7 +205,7 @@ public class ClientModel {
 				String input3 = input.getValue();
 				String winner = input3.substring(0, input3.indexOf(':'));
 				boolean win = nickname.equals(winner);
-				gameGui.gameOver(win);
+				boardGUI.gameOver(win);
 				break;
 			case LOGIN:
 				nickname = input.getValue();

@@ -6,12 +6,15 @@ import tp.project.goGame.shared.GameSize;
 import tp.project.goGame.shared.Protocol;
 import tp.project.goGame.shared.Request;
 import tp.project.goGame.shared.Type;
+import tp.project.goGame.state.LoggedInState;
 
 public class GameThread {
 	ClientThread player1,player2 = null;
 	int gameSize;
 	Board board = null;
 	int passCount = 0;
+	int denyCount = 0;
+	int accCount = 0;
 	boolean acc1,acc2 = false;
 	/*
 	 * player1 is 1(black), player2 is 2(white)
@@ -35,62 +38,70 @@ public class GameThread {
 		}
 	}
 	
-	public void denyCase()
+	public synchronized int ansEGP(ClientThread from,int value)
 	{
-		acc2 = acc1 = false;
-	}
-	
-	public synchronized boolean acceptEGP(ClientThread client)
-	{
-		Request temp;
-		if(client.equals(player1))
+		//1 - accept
+		//0 - deny
+		switch(value)
 		{
-			if(acc2)
-			{
-				temp = new Request(Type.GAMEOVER,board.getWinner());
-				
-				player1.proceedAction(Protocol.getMessage(temp));
-				player2.proceedAction(Protocol.getMessage(temp));
-		
-				return true;
-			}
-			else
-			{
-				acc1 = true;
-				return false;
-			}
-		}else if(client.equals(player2))
-		{
-			if(acc1){
-				temp = new Request(Type.GAMEOVER,board.getWinner());
-				player1.proceedAction(Protocol.getMessage(temp));
-				player2.proceedAction(Protocol.getMessage(temp));
-				return true;
-			}
-			else
-			{
-				acc2=true;
-				return false;
-			}
+		case 1:
+			accCount++;
+			break;
+		case 0:
+			denyCount++;
+			break;
 		}
 		
-		return false;
+		if((denyCount+accCount)==2)
+		{
+			if(denyCount==2)
+			{
+				denyCount = 0;
+				accCount = 0;
+				return 0;
+			}
+			else if(accCount==2)
+			{
+				denyCount = 0;
+				accCount = 0;
+				player1.changeState(new LoggedInState());
+				player2.changeState(new LoggedInState());
+				return 1;
+			}
+			else
+			{
+				//TODO
+				denyCount = 0;
+				accCount = 0;
+				return 0;
+			}
+			
+		
+		}else
+		return -1;
+		
 	}
+	
 	
 	public Request makePass(ClientThread from)
 	{
 		passCount++;
-		Request out = new Request(Type.PASS,from.getAccount().getNickname());
-		if(from.equals(player1))
-			player2.sendToClient(Protocol.getMessage(out));
-		else
-			player1.sendToClient(Protocol.getMessage(out));
-		
-		if(passCount==2)
+		Request out = null;
+		if(passCount==1)
 		{
-			Request egp = new Request(Type.ENDGAMEPROMPT,"");
-			player2.sendToClient(Protocol.getMessage(egp));
-			player1.sendToClient(Protocol.getMessage(egp));
+			out = new Request(Type.PASS,from.getAccount().getNickname());
+			if(from.equals(player1))
+				player2.sendToClient(Protocol.getMessage(out));
+			else
+				player1.sendToClient(Protocol.getMessage(out));
+		}
+		else if(passCount==2)
+		{
+			out = new Request(Type.ENDGAMEPROMPT,"");
+			if(from.equals(player1))
+				player2.sendToClient(Protocol.getMessage(out));
+			else
+				player1.sendToClient(Protocol.getMessage(out));
 		}
 		
 		return out;
@@ -98,7 +109,7 @@ public class GameThread {
 	
 	public Request makeMove(ClientThread from, int x, int y,int color)
 	{
-		passCount = 0;
+		
 		Request out;
 		try{
 			if(from.equals(player1))
@@ -111,7 +122,7 @@ public class GameThread {
 				out = new Request(Type.MOVE,"MOV"+board.getBoard());
 				player1.sendToClient(Protocol.getMessage(out));
 			}
-			
+			passCount = 0;
 			return out;
 			
 		}catch(WrongMoveException e)

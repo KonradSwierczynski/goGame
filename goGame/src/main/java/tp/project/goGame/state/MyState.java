@@ -16,6 +16,6 @@ public interface MyState {
 	public Request StartGame(ClientThread client, String input);
 	public Request SendMesage(String input);
 	public Request MakeMove(GameThread gameThread,String input);
-	public Request QuitGame(ClientThread client,String winner);
+	public Request QuitGame(ClientThread client,String input);
 	public Request QuitQueue(ClientThread client);
 }

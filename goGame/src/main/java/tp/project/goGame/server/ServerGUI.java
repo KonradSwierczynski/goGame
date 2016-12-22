@@ -24,7 +24,7 @@ public class ServerGUI {
 		frame.getContentPane().setLayout(null);
 		
 		logArea = new JTextArea();
-		logArea.setFont(new Font("Monospaced", Font.PLAIN, 7));
+		logArea.setFont(new Font("Monospaced", Font.PLAIN, 8));
 		logArea.setBounds(10, 49, 347, 341);
 		frame.getContentPane().add(logArea);
 		

@@ -12,7 +12,7 @@ public class InGameState implements MyState{
 
 	@Override
 	public void ChangeState(ClientThread client, MyState state) {
-		// TODO Auto-generated method stub
+		client.changeState(state);
 		
 	}
 
@@ -53,9 +53,11 @@ public class InGameState implements MyState{
 	}
 
 	@Override
-	public Request QuitGame(ClientThread client, String winner) {
+	public Request QuitGame(ClientThread client, String input) {
+		//database win lose;
+		
 		client.changeState(new LoggedInState());
-		return new Request(Type.GAMEOVER,winner);
+		return new Request(Type.GAMEOVER,input);
 	}
 
 	@Override

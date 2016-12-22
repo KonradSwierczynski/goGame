@@ -1,5 +1,6 @@
 package tp.project.goGame.client;
 
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +36,8 @@ public class BoardGUI{
 	private JTextArea textArea;
 	private static int size;
 	private JButton btnPass;
+	
+	public boolean waitForAnswer = false;
 	
 	
 
@@ -89,6 +92,19 @@ public class BoardGUI{
 		btnPass = new JButton("PASS");
 		btnPass.setBounds(477, 348, 78, 23);
 		frame.getContentPane().add(btnPass);
+		btnPass.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(myTurn)
+				{
+					clientModel.sendToServer(Protocol.getMessage(new Request(Type.PASS,clientModel.getNickname())));
+				}else
+					JOptionPane.showMessageDialog(getFrame(), "not your turn!");
+				
+			}
+			
+		});
 		
 		textField = new JTextField();
 		textField.setBounds(380, 317, 175, 20);
@@ -158,6 +174,23 @@ public class BoardGUI{
 			
 			position += 1;
 		}
+	}
+	
+	public int endGamePrompt()
+	{
+		return JOptionPane.showConfirmDialog((Component)null, "End the game?","End game prompt",JOptionPane.YES_NO_OPTION);
+	}
+	
+	public void gameOver(boolean win) {
+		if(win)
+			JOptionPane.showMessageDialog(frame, "You won");
+		else
+			JOptionPane.showMessageDialog(frame, opponentNick + " won");
+		
+		frame.setVisible(false);
+		frame.dispose();
+		clientGUI.showNewGame();
+		clientGUI.getFrame().setVisible(true);
 	}
 	
 	class ButtonListener implements ActionListener

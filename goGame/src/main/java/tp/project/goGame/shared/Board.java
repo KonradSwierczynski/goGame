@@ -10,7 +10,7 @@ public class Board {
 	private int[][] previousBoard;
 	private GameSize gameSize;
 	private int size;
-	private String currentLeader;
+	private String currentLeader = "Bartol";
 	
 	public Board(GameSize gameSize) {
 		this.board = new int[gameSize.getValue()][gameSize.getValue()];

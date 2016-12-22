@@ -99,7 +99,7 @@ public class ConnectedState implements MyState {
 	}
 
 	@Override
-	public Request QuitGame(ClientThread client, String winner) {
+	public Request QuitGame(ClientThread client, String input) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -43,7 +43,8 @@ public class ClientThread extends Thread{
 				String outLine;
 				line = in.readLine();
 				
-				log(clientSocket, Protocol.getRequest(line).getType() + ": " + Protocol.getRequest(line).getValue());
+				//log(clientSocket, Protocol.getRequest(line).getType() + ": " + Protocol.getRequest(line).getValue());
+				log(clientSocket,line + this.myState.toString());
 				outLine = Protocol.getMessage(proceedAction(line));
 				out.println(outLine);
 				
@@ -92,18 +93,30 @@ public class ClientThread extends Thread{
 			log(this.clientSocket,myState.toString());
 			break;
 		case ACCEPT:
-			if(!currentGame.acceptEGP(this))
-				outRequest = new Request(Type.MESSAGE,"waiting for player2 to accept");
-			else
+			int result = currentGame.ansEGP(this, 1);
+			if(result == -1)
+				outRequest = new Request(Type.MESSAGE,"waiting for player2");
+			else if(result == 1)
 			{
-				outRequest = new Request(Type.GAMEOVER,currentGame.getWinner());
+				outRequest = new Request(Type.GAMEOVER,currentGame.getWinner() + ":" + "loser");
 				currentGame.sendToClients(this, Protocol.getMessage(outRequest));
-			}
+			}else if(result == 2)
+				outRequest = new Request(Type.DENY,"EGP");
+				currentGame.sendToClients(this, Protocol.getMessage(outRequest));
 			break;
 		case DENY:
-			outRequest = new Request(Type.DENY,"EGP");
-			this.currentGame.sendToClients(this, Protocol.getMessage(outRequest));
-			this.currentGame.denyCase();
+			int result2 = currentGame.ansEGP(this, 0);
+			if(result2 == -1)
+				outRequest = new Request(Type.MESSAGE,"waiting for player2");
+			else if(result2 == 0)
+			{
+				outRequest = new Request(Type.DENY,"EGP");
+				currentGame.sendToClients(this, Protocol.getMessage(outRequest));
+			}else if(result2 == 2)
+			{
+				outRequest = new Request(Type.DENY,"EGP");
+				currentGame.sendToClients(this, Protocol.getMessage(outRequest));
+			}
 			break;
 		case GAMEOVER:
 			outRequest = myState.QuitGame(this,request.getValue());
