@@ -35,25 +35,33 @@ public class Button extends JButton{
 				img = ImageIO.read(new File("resources/images/blackStone.png"));
 				img = img.getScaledInstance(this.pixelSize, this.pixelSize, Image.SCALE_DEFAULT);
 				icon = new ImageIcon(img);
+				this.setOpaque(true);
+				this.setContentAreaFilled(true);
+				this.setIcon(icon);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else{
+		}else if(i==2){
 			try {
 				img = ImageIO.read(new File("resources/images/whiteStone.png"));
 				img = img.getScaledInstance(this.pixelSize, this.pixelSize, Image.SCALE_DEFAULT);
 				icon = new ImageIcon(img);
+				this.setOpaque(true);
+				this.setContentAreaFilled(true);
+				this.setIcon(icon);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			//System.out.println(icon.getIconWidth()+ " --" +icon.getIconHeight());
+		}else if(i==0)
+		{
+			this.setOpaque(false);
+			this.setContentAreaFilled(false);
+			this.setBorderPainted(false);
+			this.setIcon(null);
 		}
-		this.setOpaque(true);
-		this.setContentAreaFilled(true);
-		this.setIcon(icon);
+		
 	}
 	
 	public void setPixelSize(int size)

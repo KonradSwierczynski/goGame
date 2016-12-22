@@ -176,7 +176,7 @@ public class Board {
 	}
 	
 	public void restoreBoard(String boardString) {
-		int position = 0;
+		int position = 3;
 		for(int i = 0; i < size; i++) {
 			for(int j = 0; j < size; j++) {
 				board[i][j] = Character.getNumericValue(boardString.charAt(position));
