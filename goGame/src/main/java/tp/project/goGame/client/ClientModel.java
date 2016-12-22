@@ -102,6 +102,7 @@ public class ClientModel {
 		myColor = color;
 		gui.getFrame().setVisible(false);
 		//this.gameGui = new GameGUI(this, gui, nicknameOpponent, myColor, size);	
+		
 		boardGUI = new BoardGUI(this,this.gui,nicknameOpponent,color,size);
 	}
 	

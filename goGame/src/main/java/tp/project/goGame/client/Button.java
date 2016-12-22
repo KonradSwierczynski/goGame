@@ -49,7 +49,7 @@ public class Button extends JButton{
 				e.printStackTrace();
 			}
 			
-			System.out.println(icon.getIconWidth()+ " --" +icon.getIconHeight());
+			//System.out.println(icon.getIconWidth()+ " --" +icon.getIconHeight());
 		}
 		this.setOpaque(true);
 		this.setContentAreaFilled(true);
