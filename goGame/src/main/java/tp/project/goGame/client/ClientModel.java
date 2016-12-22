@@ -36,6 +36,7 @@ public class ClientModel {
 	private String nickname = null;
 	private ClientGUI gui = null;
 	private GameGUI gameGui = null;
+	private BoardGUI boardGUI = null;
 	private int gameSize;
 	private int myColor;
 	
@@ -97,7 +98,9 @@ public class ClientModel {
 	
 	public void startNewGame(int size, int color, String nicknameOpponent) {
 		myColor = color;
-		this.gameGui = new GameGUI(this, gui, nicknameOpponent, myColor, size);	
+		gui.getFrame().setVisible(false);
+		//this.gameGui = new GameGUI(this, gui, nicknameOpponent, myColor, size);	
+		boardGUI = new BoardGUI(13);
 	}
 	
 	class ListenFromServer extends Thread

@@ -8,3 +8,8 @@ TODO LIST:
 	
 2. Basic welcome GUI, Reqister form, Login Form, basic client log - Konrad
 3. Request handle : login, register, logout. Basic server log.
+
+setBorderPainted(true);
+		        setContentAreaFilled(true);
+		        setOpaque(true);
+		        repaint();
