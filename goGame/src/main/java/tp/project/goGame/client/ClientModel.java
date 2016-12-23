@@ -142,6 +142,7 @@ public class ClientModel {
 			switch(input.getType())
 			{
 			case ENDGAMEPROMPT:
+				boardGUI.updateBoard(input.getValue());
 				boardGUI.disableGUI();
 				int result = boardGUI.endGamePrompt();
 				if(result == 0)
@@ -176,7 +177,7 @@ public class ClientModel {
 			case PASS:
 				boardGUI.nextTurn();
 				if(!input.getValue().equals(nickname))
-					JOptionPane.showMessageDialog(boardGUI.getFrame(), input.getValue() + " passed." );
+					boardGUI.reciveMessage("PASS:" + input.getValue());
 				break;
 			case NEWGAME:
 				String mode = input.getValue().substring(0, 3);
@@ -190,8 +191,12 @@ public class ClientModel {
 			case ACCEPT:
 				break;
 			case DENY:
-				if(input.getValue().equals("EGP"))
+				if(input.getValue().substring(0,3).equals("EGP"))
+				{
+					String temp = input.getValue().substring(3);
+					boardGUI.updateBoard(temp);
 					boardGUI.enableGUI();
+				}
 				else{
 				JOptionPane.showMessageDialog(gui.getFrame(),
 					    input.getValue(),
@@ -203,9 +208,18 @@ public class ClientModel {
 				break;
 			case GAMEOVER:
 				String input3 = input.getValue();
-				String winner = input3.substring(0, input3.indexOf(':'));
+				int j = input3.indexOf(":");
+				String winner = input3.substring(0, j);
+				input3 = input3.substring(j+1);
+				
+				j = input3.indexOf(":");
+				float pBlack = Float.parseFloat(input3.substring(0, j));
+				input3 = input3.substring(j+1);
+				
+				float pWhite = Float.parseFloat(input3);
 				boolean win = nickname.equals(winner);
-				boardGUI.gameOver(win);
+				
+				boardGUI.gameOver(win,pBlack,pWhite);
 				break;
 			case LOGIN:
 				nickname = input.getValue();

@@ -314,4 +314,9 @@ public class Board {
 		return currentLeader;
 	}
 	
+	public void setWinner(String winner)
+	{
+		currentLeader = winner;
+	}
+	
 }

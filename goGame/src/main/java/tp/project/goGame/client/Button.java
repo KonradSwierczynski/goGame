@@ -1,5 +1,6 @@
 package tp.project.goGame.client;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -56,8 +57,23 @@ public class Button extends JButton{
 			}
 		}else if(i==0)
 		{
+			this.setBackground(null);
 			this.setOpaque(false);
 			this.setContentAreaFilled(false);
+			this.setBorderPainted(false);
+			this.setIcon(null);
+		}else if(i==3)
+		{
+			this.setBackground(Color.MAGENTA);
+			this.setOpaque(true);
+			this.setContentAreaFilled(true);
+			this.setBorderPainted(false);
+			this.setIcon(null);
+		}else if(i==4)
+		{
+			this.setBackground(Color.BLUE);
+			this.setOpaque(true);
+			this.setContentAreaFilled(true);
 			this.setBorderPainted(false);
 			this.setIcon(null);
 		}

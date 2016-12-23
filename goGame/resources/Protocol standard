@@ -21,7 +21,7 @@ MOVE:
 MOVE: odebrane
 	"MOVa1:a2:a3:...a19::b1:b...::
 GAMEOVER:
-	"GMOwinner:loser" (jako username)
+	"GMOwinner:blackPKT:whitePKT" (jako username)
 PASS:
 	"PASusername"
 STARTGAME:

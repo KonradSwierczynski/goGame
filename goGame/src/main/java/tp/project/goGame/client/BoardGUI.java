@@ -15,6 +15,12 @@ import tp.project.goGame.shared.Board;
 import tp.project.goGame.shared.Protocol;
 import tp.project.goGame.shared.Request;
 import tp.project.goGame.shared.Type;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
 
 public class BoardGUI{
 	
@@ -36,6 +42,9 @@ public class BoardGUI{
 	private JTextArea textArea;
 	private static int size;
 	private JButton btnPass;
+	private JPanel panel_1;
+	private JLabel lblYou;
+	private JLabel lblNewLabel_1;
 	
 	public boolean waitForAnswer = false;
 	
@@ -48,13 +57,24 @@ public class BoardGUI{
 		this.myColor = myColor;
 		this.size = size;
 		
-		if(myColor == 1)
-			myTurn = true;
-		else
-			myTurn = false;
-		
-		
 		initialize();
+		
+		panel_1.setBackground(Color.BLACK);
+		lblNewLabel_1.setText(opponentNick);
+		frame.setTitle(size + "x" + size +" - go Game");
+		
+		if(myColor == 1)
+		{
+			lblYou.setText("YOU");
+			myTurn = true;
+		}
+		else
+		{
+			lblYou.setText("OPP");
+			myTurn = false;
+		}
+		
+		
 	}
 	
 	public void reciveMessage(String message) {
@@ -76,7 +96,7 @@ public class BoardGUI{
 		panel.setLayout(new GridLayout(size,size));
 		
 		textArea = new JTextArea();
-		textArea.setBounds(380, 11, 175, 295);
+		textArea.setBounds(380, 88, 175, 218);
 		frame.getContentPane().add(textArea);
 		
 		JButton btnSend = new JButton("SEND");
@@ -111,6 +131,33 @@ public class BoardGUI{
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
+		JPanel panelInfo = new JPanel();
+		panelInfo.setBorder(new LineBorder(new Color(0, 0, 0), 1));
+		panelInfo.setBounds(380, 11, 175, 66);
+		frame.getContentPane().add(panelInfo);
+		panelInfo.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Opponent:");
+		lblNewLabel.setBounds(10, 7, 76, 14);
+		panelInfo.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("Bartol");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_1.setBounds(10, 22, 76, 14);
+		panelInfo.add(lblNewLabel_1);
+		
+		JLabel lblColor = new JLabel("Color:");
+		lblColor.setBounds(86, 7, 46, 14);
+		panelInfo.add(lblColor);
+		
+		panel_1 = new JPanel();
+		panel_1.setBounds(86, 30, 79, 25);
+		panelInfo.add(panel_1);
+		
+		lblYou = new JLabel("YOU");
+		lblYou.setForeground(Color.RED);
+		panel_1.add(lblYou);
+		
 		buttons = new Button[size][];
 		for(int i=0;i<size;i++)
 		{
@@ -124,7 +171,7 @@ public class BoardGUI{
 				panel.add(buttons[i][j]);
 			}
 		}
-	
+		
 		frame.setVisible(true);
 	}
 	
@@ -157,6 +204,30 @@ public class BoardGUI{
 	public void nextTurn()
 	{
 		myTurn = !myTurn;
+		
+		if(myTurn)
+		{
+			if(myColor == 1)
+			{
+				lblYou.setText("YOU");
+				panel_1.setBackground(Color.BLACK);
+			}else
+			{
+				lblYou.setText("YOU");
+				panel_1.setBackground(Color.WHITE);
+			}
+		}else
+		{
+			if(myColor == 1)
+			{
+				lblYou.setText("OPP");
+				panel_1.setBackground(Color.WHITE);
+			}else
+			{
+				lblYou.setText("OPP");
+				panel_1.setBackground(Color.BLACK);
+			}
+		}
 	}
 	
 	public JFrame getFrame()
@@ -165,7 +236,8 @@ public class BoardGUI{
 	}
 	
 	public void updateBoard(String boardString) {
-		int position = 3;
+		System.out.println(boardString);
+		int position = 0;
 		for(int i = 0; i < size; i++) {
 			for(int j = 0; j < size; j++) {
 				buttons[i][j].setColor(Character.getNumericValue(boardString.charAt(position)));
@@ -181,11 +253,11 @@ public class BoardGUI{
 		return JOptionPane.showConfirmDialog((Component)null, "End the game?","End game prompt",JOptionPane.YES_NO_OPTION);
 	}
 	
-	public void gameOver(boolean win) {
+	public void gameOver(boolean win,float pBlack, float pWhite) {
 		if(win)
-			JOptionPane.showMessageDialog(frame, "You won");
+			JOptionPane.showMessageDialog(frame, "You won\n" + "BLACK: " + pBlack + " WHITE: " + pWhite);
 		else
-			JOptionPane.showMessageDialog(frame, opponentNick + " won");
+			JOptionPane.showMessageDialog(frame, opponentNick + " won\n" + "BLACK: " + pBlack + " WHITE: " + pWhite);
 		
 		frame.setVisible(false);
 		frame.dispose();
@@ -202,6 +274,7 @@ public class BoardGUI{
 			{
 				Button button = (Button)arg0.getSource();
 				clientModel.sendMove(button.getx(), button.gety());
+				System.out.println(button.getx() + "-" + button.gety());
 			}else
 				JOptionPane.showMessageDialog(getFrame(), "not your turn!");
 		}

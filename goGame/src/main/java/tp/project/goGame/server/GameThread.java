@@ -62,6 +62,18 @@ public class GameThread {
 			}
 			else if(accCount==2)
 			{
+				//TODO DATABASE CONNECTION
+				board.endGame();
+				if(board.getBlackScore()>board.getWhiteScore())
+				{
+					board.setWinner(player1.getAccount().getNickname());
+				}else if(board.getBlackScore()<board.getWhiteScore())
+				{
+					board.setWinner(player2.getAccount().getNickname());
+				}
+				else
+					board.setWinner("none");
+				
 				denyCount = 0;
 				accCount = 0;
 				player1.changeState(new LoggedInState());
@@ -81,8 +93,7 @@ public class GameThread {
 		return -1;
 		
 	}
-	
-	
+
 	public Request makePass(ClientThread from)
 	{
 		passCount++;
@@ -97,7 +108,8 @@ public class GameThread {
 		}
 		else if(passCount==2)
 		{
-			out = new Request(Type.ENDGAMEPROMPT,"");
+			board.endGame();
+			out = new Request(Type.ENDGAMEPROMPT,board.getBoard());
 			if(from.equals(player1))
 				player2.sendToClient(Protocol.getMessage(out));
 			else
@@ -115,11 +127,11 @@ public class GameThread {
 			if(from.equals(player1))
 			{
 				board.makeMove(x, y, color);
-				out = new Request(Type.MOVE,"MOV"+board.getBoard());
+				out = new Request(Type.MOVE,board.getBoard());
 				player2.sendToClient(Protocol.getMessage(out));
 			} else {
 				board.makeMove(x, y, color);
-				out = new Request(Type.MOVE,"MOV"+board.getBoard());
+				out = new Request(Type.MOVE,board.getBoard());
 				player1.sendToClient(Protocol.getMessage(out));
 			}
 			passCount = 0;
@@ -144,6 +156,26 @@ public class GameThread {
 	public String getWinner()
 	{
 		return board.getWinner();
+	}
+	
+	public float getWhiteScore()
+	{
+		return board.getWhiteScore();
+	}
+	
+	public float getBlackScore()
+	{
+		return board.getBlackScore();
+	}
+	
+	public void restoreBoard()
+	{
+		board.restoreBoard();
+	}
+	
+	public String getBoard()
+	{
+		return board.getBoard();
 	}
 
 }

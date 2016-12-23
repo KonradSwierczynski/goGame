@@ -98,11 +98,14 @@ public class ClientThread extends Thread{
 				outRequest = new Request(Type.MESSAGE,"waiting for player2");
 			else if(result == 1)
 			{
-				outRequest = new Request(Type.GAMEOVER,currentGame.getWinner() + ":" + "loser");
+				outRequest = new Request(Type.GAMEOVER,currentGame.getWinner() + ":" + currentGame.getBlackScore() + ":" + currentGame.getWhiteScore());
 				currentGame.sendToClients(this, Protocol.getMessage(outRequest));
-			}else if(result == 2)
-				outRequest = new Request(Type.DENY,"EGP");
+			}else if(result == 0){
+				currentGame.restoreBoard();
+				String temp = currentGame.getBoard();
+				outRequest = new Request(Type.DENY,"EGP" + temp);
 				currentGame.sendToClients(this, Protocol.getMessage(outRequest));
+			}
 			break;
 		case DENY:
 			int result2 = currentGame.ansEGP(this, 0);
@@ -110,11 +113,9 @@ public class ClientThread extends Thread{
 				outRequest = new Request(Type.MESSAGE,"waiting for player2");
 			else if(result2 == 0)
 			{
-				outRequest = new Request(Type.DENY,"EGP");
-				currentGame.sendToClients(this, Protocol.getMessage(outRequest));
-			}else if(result2 == 2)
-			{
-				outRequest = new Request(Type.DENY,"EGP");
+				currentGame.restoreBoard();
+				String temp = currentGame.getBoard();
+				outRequest = new Request(Type.DENY,"EGP" + temp);
 				currentGame.sendToClients(this, Protocol.getMessage(outRequest));
 			}
 			break;
