@@ -49,7 +49,7 @@ public class Board {
 	 */
 	public void makeMove(int x, int y, int color) throws WrongMoveException {
 		
-		if(checkFreePositions()) {
+		if(allPositionsOccupied()) {
 			throw new WrongMoveException("No more free positions");
 		}
 		
@@ -116,7 +116,7 @@ public class Board {
 	 * Checks if there are still free positions on the board
 	 * @return	True if there is at least one free position, otherwise returns false 
 	 */
-	public boolean checkFreePositions() {
+	public boolean allPositionsOccupied() {
 		boolean noFreePositions = true;
 		
 		for(int i = 0; i < size; i++)
