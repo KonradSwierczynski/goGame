@@ -7,6 +7,11 @@ import tp.project.goGame.server.ClientThread;
 import tp.project.goGame.server.GameThread;
 import tp.project.goGame.shared.Request;
 
+/**
+ * Interface for state classes used in ClientThread.
+ * State pattern
+ *
+ */
 public interface MyState {
 	void ChangeState(ClientThread client, MyState state);
 	public Request LogIn(ClientThread client, String input) throws NoAccountFoundException, WrongPasswordException;

@@ -1,5 +1,9 @@
 package tp.project.goGame.shared;
 
+/**
+ * Class for messages made to send between client and server
+ *
+ */
 public class Request {
 	private Type type;
 	private String value;

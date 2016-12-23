@@ -1,5 +1,9 @@
 package tp.project.goGame.shared;
 
+/**
+ * Converts request to String and Sting request
+ *
+ */
 public class Protocol {
 	public static Request getRequest(String value)
 	{

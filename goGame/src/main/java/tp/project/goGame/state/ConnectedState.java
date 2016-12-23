@@ -12,6 +12,10 @@ import tp.project.goGame.shared.Protocol;
 import tp.project.goGame.shared.Request;
 import tp.project.goGame.shared.Type;
 
+/**
+ * State for not logged connected user
+ *
+ */
 public class ConnectedState implements MyState {
 	private static MyState instance;
 	

@@ -11,6 +11,10 @@ import org.hibernate.cfg.Configuration;
 import exceptions.AccountExistsException;
 import tp.project.goGame.shared.Account;
 
+/**
+ * Class maintaining connection with database
+ *
+ */
 public class DataBaseConnector {
 	
 	private static DataBaseConnector instance;

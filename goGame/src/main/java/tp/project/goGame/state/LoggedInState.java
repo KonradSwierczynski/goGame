@@ -5,6 +5,10 @@ import tp.project.goGame.server.GameThread;
 import tp.project.goGame.shared.Request;
 import tp.project.goGame.shared.Type;
 
+/**
+ * State for logged user
+ *
+ */
 public class LoggedInState implements MyState {
 
 	
