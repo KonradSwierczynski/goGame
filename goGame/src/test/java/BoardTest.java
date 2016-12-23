@@ -107,6 +107,13 @@ public class BoardTest {
 	}
 	
 	@Test
+	public void testEndGame() {
+		Board board = new Board(GameSize.size9x9);
+		board.endGame();
+		assertNotNull(board);
+	}
+	
+	@Test
 	public void testGetBoard() {
 		Board board = new Board(GameSize.size9x9);
 		String boardString = board.getBoard();

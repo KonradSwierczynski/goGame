@@ -113,6 +113,22 @@ public class Board {
 			System.out.println("");
 		}
 	}
+	
+	/**
+	 * Gets number of stones on the current board
+	 * @return Number of stones on the current board
+	 */
+	private int nuberOfStonesOnBoard() {
+		int numberOfStones = 0;
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				if(board[i][j] != 0) {
+					numberOfStones++;
+				}
+			}
+		}	
+		return numberOfStones;
+	}
 
 	/**
 	 * Checks if there are still free positions on the board
@@ -141,22 +157,24 @@ public class Board {
 		float blackCapturedBk = this.blackCaptured;
 		float whiteCapturedBk = this.whiteCaptured;
 		
-		for(int i = 0; i < size; i++)
-		{
-			for(int j = 0; j < size; j++)
+		if(nuberOfStonesOnBoard() != 0) {
+			for(int i = 0; i < size; i++)
 			{
-				if(board[i][j] == 0) {
-					try {
-						makeMove(i, j, 1);
-					} catch (WrongMoveException e) {
+				for(int j = 0; j < size; j++)
+				{
+					if(board[i][j] == 0) {
+						try {
+							makeMove(i, j, 1);
+						} catch (WrongMoveException e) {
+						}
+						
+						board[i][j] = 0;
+						try {
+							makeMove(i, j, 2);
+						} catch (WrongMoveException e) {
+						}
+						board[i][j] = 0;
 					}
-					
-					board[i][j] = 0;
-					try {
-						makeMove(i, j, 2);
-					} catch (WrongMoveException e) {
-					}
-					board[i][j] = 0;
 				}
 			}
 		}
