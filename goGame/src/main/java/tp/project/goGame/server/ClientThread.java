@@ -76,20 +76,36 @@ public class ClientThread extends Thread{
 		Request outRequest = null;
 		switch(request.getType())
 		{
+		case CONCEDE:
+			this.myState.ChangeState(this, new LoggedInState());
+			if(request.getValue().equals("bot"))
+			{
+			outRequest = new Request(Type.GAMEOVER,currentGame.getWinner() + ":" + currentGame.getBlackScore() + ":" + currentGame.getWhiteScore());
+			currentGame.sendToClients(this, Protocol.getMessage(outRequest));
+			}else
+			{
+				currentGame.QuitGamePlayers();
+				outRequest = new Request(Type.GAMEOVER,currentGame.getOpponentNickname(this) + ":" + currentGame.getBlackScore() + ":" + currentGame.getWhiteScore());
+				currentGame.sendToClients(this, Protocol.getMessage(outRequest));
+			}
+			break;
 		case STARTGAME:
 			outRequest = myState.StartGame(this, request.getValue());
-			log(this.clientSocket,myState.toString());
 			break;
 		case LEAVEQUEUE:
 			outRequest = myState.QuitQueue(this);
-			log(this.clientSocket,myState.toString());
 			break;
 		case PASS:
 			outRequest = currentGame.makePass(this);
 			break;
 		case NEWGAME:
+			
 			outRequest = myState.PlayGame(this, request.getValue());
-			Server.getInstance().checkQueue(this, this.getGameSize());
+			
+			if(request.getValue().substring(0, 3).equals("pvp"))
+				Server.getInstance().checkQueue(this, this.getGameSize());
+			
+			
 			log(this.clientSocket,myState.toString());
 			break;
 		case ACCEPT:

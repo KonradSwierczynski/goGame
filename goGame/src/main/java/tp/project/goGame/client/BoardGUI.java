@@ -4,6 +4,8 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -47,15 +49,19 @@ public class BoardGUI{
 	private JLabel lblNewLabel_1;
 	
 	public boolean waitForAnswer = false;
+	private boolean bot;
 	
 	
 
-	public BoardGUI(ClientModel clientModel, ClientGUI clientGUI, String opponentNick, int myColor, int size) {
+	public BoardGUI(ClientModel clientModel, ClientGUI clientGUI, String opponentNick, int myColor, int size,boolean bot) {
 		this.clientModel = clientModel;
 		this.clientGUI = clientGUI;
 		this.opponentNick = opponentNick;
 		this.myColor = myColor;
 		this.size = size;
+		this.bot = bot;
+		
+		System.out.println(this.bot);
 		
 		initialize();
 		
@@ -77,6 +83,11 @@ public class BoardGUI{
 		
 	}
 	
+	public String getOpponentNickname()
+	{
+		return this.opponentNick;
+	}
+	
 	public void reciveMessage(String message) {
 		this.textArea.append(message + "\n");
 	}
@@ -87,8 +98,10 @@ public class BoardGUI{
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 581, 426);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.addWindowListener(new ExitListener());
 		
 		BoardPanel panel = new BoardPanel(size);
 		panel.setBounds(10, 11, 360, 360);
@@ -98,6 +111,7 @@ public class BoardGUI{
 		textArea = new JTextArea();
 		textArea.setBounds(380, 88, 175, 218);
 		frame.getContentPane().add(textArea);
+		textArea.setEditable(false);
 		
 		JButton btnSend = new JButton("SEND");
 		btnSend.setBounds(380, 348, 78, 23);
@@ -105,7 +119,8 @@ public class BoardGUI{
 		btnSend.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				clientModel.sendToServer(Protocol.getMessage(new Request(Type.MESSAGE,clientModel.getNickname() + ">"+ textField.getText())));
+				if(!textField.getText().equals(""))
+					clientModel.sendToServer(Protocol.getMessage(new Request(Type.MESSAGE,clientModel.getNickname() + ">"+ textField.getText())));
 			}
 		});
 		
@@ -247,6 +262,7 @@ public class BoardGUI{
 			position += 1;
 		}
 	}
+
 	
 	public int endGamePrompt()
 	{
@@ -280,4 +296,35 @@ public class BoardGUI{
 		}
 		
 	}
+	
+	class ExitListener extends WindowAdapter {
+
+	    @Override
+	    public void windowClosing(WindowEvent e) {
+	        int confirm;
+	        if(bot)
+	        {
+	        	confirm = JOptionPane.showOptionDialog(
+		   	             null, "Are You Sure you Want to end this Game?", 
+		   	             "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
+		   	             JOptionPane.QUESTION_MESSAGE, null, null, null);
+	        	System.out.println(confirm);
+	        	if(confirm == 0)
+	        	{
+	        		clientModel.sendToServer(Protocol.getMessage(new Request(Type.CONCEDE,"bot")));
+	        	}
+	        }else
+	        {
+	        	confirm = JOptionPane.showOptionDialog(
+	   	             null, "Are You Sure you Want to Concede?", 
+	   	             "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
+	   	             JOptionPane.QUESTION_MESSAGE, null, null, null);
+	        	System.out.println(confirm);
+	        	if (confirm == 0) {
+	        		clientModel.sendToServer(Protocol.getMessage(new Request(Type.CONCEDE,"pvp")));
+	 	        }
+	        }
+	        
+	    }
+	};
 }

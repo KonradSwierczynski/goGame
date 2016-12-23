@@ -29,19 +29,26 @@ public class LoggedInState implements MyState {
 	}
 
 	public Request PlayGame(ClientThread client, String input) {
+		Request out = null;
+		
+		String line = input;
 		String mode = input.substring(0, 3);
 		int size = Integer.parseInt(input.substring(3));
-			client.setGameSize(size);
-			if(mode.equals("pvp"))
-			{
-				client.changeState(new InQueueState());	
-				
-			}else if(mode.equals("bot"))
-			{
-				client.changeState(new InGameState());
-			}
+		client.setGameSize(size);
+		if(mode.equals("pvp"))
+		{
+			out = new Request(Type.NEWGAME,input);
+			client.changeState(new InQueueState());	
+			
+		}else if(mode.equals("bot"))
+		{
+			GameThread gameThread = new GameThread(client,null,size);
+			client.setGame(gameThread);
+			client.changeState(new InGameState());
+			out = new Request(Type.STARTGAME,size+":BOT:1");
+		}
 		
-		return new Request(Type.NEWGAME,input);
+		return out;
 	}
 
 	public Request SendMesage(String input) {

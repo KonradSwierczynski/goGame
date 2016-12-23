@@ -18,6 +18,7 @@ public class GameThread {
 	boolean acc1,acc2 = false;
 	/*
 	 * player1 is 1(black), player2 is 2(white)
+	 * if player2 is null then it's bot
 	 */
 	public GameThread(ClientThread player1, ClientThread player2, int gameSize)
 	{
@@ -76,8 +77,7 @@ public class GameThread {
 				
 				denyCount = 0;
 				accCount = 0;
-				player1.changeState(new LoggedInState());
-				player2.changeState(new LoggedInState());
+				this.QuitGamePlayers();
 				return 1;
 			}
 			else
@@ -98,22 +98,29 @@ public class GameThread {
 	{
 		passCount++;
 		Request out = null;
-		if(passCount==1)
+		if(player2 == null)
 		{
-			out = new Request(Type.PASS,from.getAccount().getNickname());
-			if(from.equals(player1))
-				player2.sendToClient(Protocol.getMessage(out));
-			else
-				player1.sendToClient(Protocol.getMessage(out));
-		}
-		else if(passCount==2)
+			board.makeBotMove(2);
+			out = new Request(Type.MOVE,board.getBoard());
+		}else
 		{
-			board.endGame();
-			out = new Request(Type.ENDGAMEPROMPT,board.getBoard());
-			if(from.equals(player1))
-				player2.sendToClient(Protocol.getMessage(out));
-			else
-				player1.sendToClient(Protocol.getMessage(out));
+			if(passCount==1)
+			{
+				out = new Request(Type.PASS,from.getAccount().getNickname());
+				if(from.equals(player1))
+					player2.sendToClient(Protocol.getMessage(out));
+				else
+					player1.sendToClient(Protocol.getMessage(out));
+			}
+			else if(passCount==2)
+			{
+				board.endGame();
+				out = new Request(Type.ENDGAMEPROMPT,board.getBoard());
+				if(from.equals(player1))
+					player2.sendToClient(Protocol.getMessage(out));
+				else
+					player1.sendToClient(Protocol.getMessage(out));
+			}
 		}
 		
 		return out;
@@ -124,6 +131,8 @@ public class GameThread {
 		
 		Request out;
 		try{
+			if(player2!=null)
+			{
 			if(from.equals(player1))
 			{
 				board.makeMove(x, y, color);
@@ -136,7 +145,14 @@ public class GameThread {
 			}
 			passCount = 0;
 			return out;
-			
+			}
+			else{
+				board.makeMove(x, y, color);
+				board.makeBotMove(2);
+				out = new Request(Type.MOVE,board.getBoard());
+				return out;
+			}
+				
 		}catch(WrongMoveException e)
 		{
 			return new Request(Type.DENY,e.getMessage());
@@ -145,11 +161,18 @@ public class GameThread {
 		
 	}
 	
+	public void QuitGamePlayers()
+	{
+		System.out.println("LogginState players");
+		player1.changeState(new LoggedInState());
+		player2.changeState(new LoggedInState());
+	}
+	
 	void sendToClients(ClientThread from,String input)
 	{
-		if(from.equals(player1))
+		if(from.equals(player1) && player2 != null)
 			player2.sendToClient(input);
-		else
+		else if(from.equals(player2) && player1 != null)
 			player1.sendToClient(input);
 	}
 	
@@ -176,6 +199,15 @@ public class GameThread {
 	public String getBoard()
 	{
 		return board.getBoard();
+	}
+	
+	public String getOpponentNickname(ClientThread client)
+	{
+		if(client.equals(player1))
+		{
+			return player2.getAccount().getNickname();
+		}else
+			return player1.getAccount().getNickname();
 	}
 
 }

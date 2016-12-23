@@ -6,28 +6,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
-import tp.project.goGame.server.Server;
-import tp.project.goGame.shared.Account;
 import tp.project.goGame.shared.Protocol;
 import tp.project.goGame.shared.Request;
 import tp.project.goGame.shared.Type;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.border.CompoundBorder;
-import javax.swing.UIManager;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 
 public class ClientModel {
 	private Socket client = null;
@@ -39,7 +22,7 @@ public class ClientModel {
 	private GameGUI gameGui = null;
 	private BoardGUI boardGUI = null;
 	
-	private int gameSize;
+	private int gameSize = 9;
 	private int myColor;
 	
 	public static void main(String[] args)
@@ -98,12 +81,12 @@ public class ClientModel {
 		sendToServer(Protocol.getMessage(request));
 	}
 	
-	public void startNewGame(int size, int color, String nicknameOpponent) {
+	public void startNewGame(int size, int color, String nicknameOpponent,boolean bot) {
 		myColor = color;
 		gui.getFrame().setVisible(false);
 		//this.gameGui = new GameGUI(this, gui, nicknameOpponent, myColor, size);	
-		
-		boardGUI = new BoardGUI(this,this.gui,nicknameOpponent,color,size);
+		System.out.println(size);
+		boardGUI = new BoardGUI(this,this.gui,nicknameOpponent,color,size,bot);
 	}
 	
 	class ListenFromServer extends Thread
@@ -167,26 +150,27 @@ public class ClientModel {
 				
 				int color = Integer.parseInt(input2);
 				
-				//JOptionPane.showMessageDialog(gui.getFrame(), size + nicknameOpponent + color);
 				
-				startNewGame(size, color, nicknameOpponent);
+				System.out.println(input.getValue());
+				//JOptionPane.showMessageDialog(gui.getFrame(), size + nicknameOpponent + color);
+				if(nicknameOpponent.equals("BOT"))
+					startNewGame(size, color, nicknameOpponent, true);
+				else
+					startNewGame(size, color, nicknameOpponent, false);
+				
+				
 				break;
 			case LEAVEQUEUE:
 				gui.showNewGame();
 				break;
 			case PASS:
-				boardGUI.nextTurn();
+				if(!boardGUI.getOpponentNickname().equals("BOT"))
+					boardGUI.nextTurn();
 				if(!input.getValue().equals(nickname))
 					boardGUI.reciveMessage("PASS:" + input.getValue());
 				break;
 			case NEWGAME:
-				String mode = input.getValue().substring(0, 3);
-				if(mode.equals("pvp"))
 					gui.showQueue();
-				else if(mode.equals("bot"))
-				{
-					gui.showQueue();
-				}
 				break;
 			case ACCEPT:
 				break;
@@ -198,6 +182,7 @@ public class ClientModel {
 					boardGUI.enableGUI();
 				}
 				else{
+				gui.enableButtons();
 				JOptionPane.showMessageDialog(gui.getFrame(),
 					    input.getValue(),
 					    "Error",
@@ -232,9 +217,11 @@ public class ClientModel {
 				break;
 			case MOVE:
 				boardGUI.updateBoard(input.getValue());
-				boardGUI.nextTurn();
+				if(!boardGUI.getOpponentNickname().equals("BOT"))
+						boardGUI.nextTurn();
 				break;
 			case REGISTER:
+				gui.enableButtons();
 				JOptionPane.showMessageDialog(gui.getFrame(), "You've registered correctly!");
 				break;
 			case WARNING:
