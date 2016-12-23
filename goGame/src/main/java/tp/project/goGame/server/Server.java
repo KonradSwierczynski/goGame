@@ -78,6 +78,8 @@ public class Server {
 				new_one.setGame(game);
 				ct.setGame(game);
 				
+				
+				
 				break;
 			}
 		}

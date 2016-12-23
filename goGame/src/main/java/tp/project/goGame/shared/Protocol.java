@@ -7,6 +7,9 @@ public class Protocol {
 		Request out = null;
 		switch(str)
 		{
+		case "CNC":
+			out = new Request(Type.CONCEDE,value.substring(3));
+			break;
 		case "EGP":
 			out = new Request(Type.ENDGAMEPROMPT,value.substring(3));
 			break;
@@ -65,6 +68,9 @@ public class Protocol {
 		
 		switch(request.getType())
 		{
+		case CONCEDE:
+			out = "CNC" + request.getValue();
+			break;
 		case ENDGAMEPROMPT:
 			out = "EGP" + request.getValue();
 			break;

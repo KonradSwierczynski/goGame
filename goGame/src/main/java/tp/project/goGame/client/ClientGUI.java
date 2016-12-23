@@ -12,7 +12,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
@@ -28,14 +30,16 @@ public class ClientGUI implements ActionListener {
 	private ClientModel clientModel = null;
 
 	private JFrame frame;
+	private JButton btnLogIn;
+	private JButton btnRegister;
 	private JPanel panel;
 	private JPanel panel_wel;
 	private JPanel panel_reg;
 	private JPanel panel_logged;
 	private JTextField usernameField;
-	private JTextField passwordField;
+	private JPasswordField passwordField;
 	private JTextField reg_usernameField;
-	private JTextField reg_passwordField;
+	private JPasswordField reg_passwordField;
 	private JTextField reg_emailReg;
 	private JTextField reg_nicknameField;
 	private JCheckBox chckbxBot;
@@ -78,7 +82,7 @@ public class ClientGUI implements ActionListener {
 		loginSection.add(usernameField);
 		usernameField.setColumns(10);
 		
-		passwordField = new JTextField();
+		passwordField = new JPasswordField();
 		passwordField.setBounds(10, 108, 86, 20);
 		loginSection.add(passwordField);
 		passwordField.setColumns(10);
@@ -91,12 +95,14 @@ public class ClientGUI implements ActionListener {
 		lblPassword.setBounds(10, 95, 86, 14);
 		loginSection.add(lblPassword);
 		
-		JButton btnLogIn = new JButton("Log In");
+		btnLogIn = new JButton("Log In");
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//clientModel.startNewGame(19, 1, "debug");
+				btnLogIn.setEnabled(false);
 				Request temp =  new Request(Type.LOGIN,usernameField.getText()+":"+passwordField.getText()+"::");
 				clientModel.sendToServer(Protocol.getMessage(temp));
+				passwordField.setText("");
 			}
 		});
 		btnLogIn.setBounds(49, 164, 89, 23);
@@ -120,7 +126,7 @@ public class ClientGUI implements ActionListener {
 		panel_reg.add(reg_usernameField);
 		reg_usernameField.setColumns(10);
 		
-		reg_passwordField = new JTextField();
+		reg_passwordField = new JPasswordField();
 		reg_passwordField.setBounds(10, 100, 280, 20);
 		panel_reg.add(reg_passwordField);
 		reg_passwordField.setColumns(10);
@@ -151,12 +157,16 @@ public class ClientGUI implements ActionListener {
 		lblNickname.setBounds(10, 181, 280, 14);
 		panel_reg.add(lblNickname);
 		
-		JButton btnRegister = new JButton("Register");
+		btnRegister = new JButton("Register");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!reg_usernameField.getText().equals("") && !reg_passwordField.getText().equals("") && !reg_emailReg.getText().equals("") && !reg_nicknameField.getText().equals(""))
+				{
+				btnRegister.setEnabled(false);
 				Request temp = new Request(Type.REGISTER,reg_usernameField.getText() + ":" + reg_passwordField.getText() + ":" + reg_emailReg.getText() + ":" + reg_nicknameField.getText());
 				clientModel.sendToServer(Protocol.getMessage(temp));
-				
+				}else
+					JOptionPane.showMessageDialog(getFrame(), "Fill data!");
 			}
 		});
 		btnRegister.setBounds(335, 228, 89, 23);
@@ -196,7 +206,7 @@ public class ClientGUI implements ActionListener {
 		
 		lblnick = new JLabel("bartek");
 		lblnick.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblnick.setBounds(258, 11, 166, 23);
+		lblnick.setBounds(184, 11, 240, 23);
 		panel_logged.add(lblnick);
 		
 		JPanel panel_choice = new JPanel();
@@ -216,6 +226,7 @@ public class ClientGUI implements ActionListener {
 		radioButton_1.addActionListener(this);
 		
 		JRadioButton radioButton_2 = new JRadioButton("9x9");
+		radioButton_2.setSelected(true);
 		radioButton_2.setActionCommand("9");
 		radioButton_2.setBounds(282, 153, 109, 23);
 		panel_choice.add(radioButton_2);
@@ -229,6 +240,7 @@ public class ClientGUI implements ActionListener {
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Request temp;
+				System.out.println(clientModel.getGameSize());
 				if(chckbxBot.isSelected())
 					temp = new Request(Type.NEWGAME,"bot" + clientModel.getGameSize());
 				else
@@ -296,6 +308,13 @@ public class ClientGUI implements ActionListener {
 	}
 	
 	
+	public void enableButtons()
+	{
+		btnLogIn.setEnabled(true);
+		btnRegister.setEnabled(true);
+	}
+	
+	
 	public void showLogged()
 	{
 		CardLayout cl = (CardLayout)panel.getLayout();
@@ -304,12 +323,14 @@ public class ClientGUI implements ActionListener {
 	
 	public void showWelcome()
 	{
+		btnLogIn.setEnabled(true);
 		CardLayout cl = (CardLayout)panel.getLayout();
 		cl.show(panel, "welcome");
 	}
 	
 	public void showRegister()
 	{
+		btnRegister.setEnabled(true);
 		CardLayout cl = (CardLayout)panel.getLayout();
 		cl.show(panel, "register");
 	}

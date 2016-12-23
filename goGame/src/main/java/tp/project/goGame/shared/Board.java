@@ -1,5 +1,7 @@
 package tp.project.goGame.shared;
 
+import java.util.Random;
+
 import exceptions.WrongMoveException;
 
 /**
@@ -17,7 +19,7 @@ public class Board {
 	private int[][] boardBeforeEnd;
 	private GameSize gameSize;
 	private int size;
-	private String currentLeader = "Bartol";
+	private String currentLeader = "BOT";
 	
 	/**
 	 * Constructior creating class for scpecified game
@@ -436,6 +438,24 @@ public class Board {
 	public void setWinner(String winner)
 	{
 		currentLeader = winner;
+	}
+
+	public void makeBotMove(int i) {
+		int x,y;
+		Random rng = new Random();
+		while(true)
+		{
+			x = rng.nextInt(size);
+			y = rng.nextInt(size);
+			try{
+				this.makeMove(x, y, i);
+				break;
+			}catch(WrongMoveException e)
+			{
+				continue;
+			}
+		}
+		
 	}
 	
 }
