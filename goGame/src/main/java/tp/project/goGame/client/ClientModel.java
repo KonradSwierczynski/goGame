@@ -19,7 +19,6 @@ public class ClientModel {
 	private String nickname = null;
 	private ClientGUI gui = null;
 	
-	private GameGUI gameGui = null;
 	private BoardGUI boardGUI = null;
 	
 	private int gameSize = 9;
