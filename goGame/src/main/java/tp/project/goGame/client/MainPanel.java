@@ -8,6 +8,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * Main panel for client aplication GUI
+ *
+ */
 public class MainPanel extends JPanel{
 	BufferedImage stop = null;
 	

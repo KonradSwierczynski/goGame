@@ -23,7 +23,14 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-
+/**
+ * Class to display and control game.
+ * Displays board and chat, provide action handlers.
+ * Communicate with CilentModel.
+ * @see ClienModel
+ * @see	ClientGUI
+ *
+ */
 public class BoardGUI{
 	
 	/*
@@ -52,7 +59,15 @@ public class BoardGUI{
 	private boolean bot;
 	
 	
-
+	/**
+	 * Constructor, uses dependency injection.
+	 * @param clientModel	Class to comunicate with server.
+	 * @param clientGUI	Instance of ClientGUI used by user.
+	 * @param opponentNick	Nick of opponent in current game.
+	 * @param myColor	My color of stone in the game.
+	 * @param size	Size of the game.
+	 * @param bot	True if plaing with bot.
+	 */
 	public BoardGUI(ClientModel clientModel, ClientGUI clientGUI, String opponentNick, int myColor, int size,boolean bot) {
 		this.clientModel = clientModel;
 		this.clientGUI = clientGUI;
@@ -83,11 +98,19 @@ public class BoardGUI{
 		
 	}
 	
+	/**
+	 * Getter for opponent nick
+	 * @return Opponent nick
+	 */
 	public String getOpponentNickname()
 	{
 		return this.opponentNick;
 	}
 	
+	/**
+	 * Append area for messages with new message.
+	 * @param message	New message
+	 */
 	public void reciveMessage(String message) {
 		this.textArea.append(message + "\n");
 	}
@@ -190,6 +213,9 @@ public class BoardGUI{
 		frame.setVisible(true);
 	}
 	
+	/**
+	 * Disables board.
+	 */
 	public void disableGUI()
 	{
 		for(int i=0;i<size;i++)
@@ -202,6 +228,9 @@ public class BoardGUI{
 		btnPass.setEnabled(false);
 	}
 	
+	/**
+	 * Enables board.
+	 */
 	public void enableGUI()
 	{
 		for(int i=0;i<size;i++)
@@ -215,7 +244,9 @@ public class BoardGUI{
 		btnPass.setEnabled(true);
 	}
 	
-	
+	/**
+	 * Changes turn to next player.
+	 */
 	public void nextTurn()
 	{
 		myTurn = !myTurn;
@@ -245,11 +276,19 @@ public class BoardGUI{
 		}
 	}
 	
+	/**
+	 * Getter for frame.
+	 * @return	Main frame.
+	 */
 	public JFrame getFrame()
 	{
 		return this.frame;
 	}
 	
+	/**
+	 * Displays recived board.
+	 * @param boardString Board to display stored in String
+	 */
 	public void updateBoard(String boardString) {
 		System.out.println(boardString);
 		int position = 0;
@@ -263,12 +302,21 @@ public class BoardGUI{
 		}
 	}
 
-	
+	/**
+	 * Ensure that player wants to end the game.
+	 * @return	True if player wants to end the game.
+	 */
 	public int endGamePrompt()
 	{
 		return JOptionPane.showConfirmDialog((Component)null, "End the game?","End game prompt",JOptionPane.YES_NO_OPTION);
 	}
 	
+	/**
+	 * Ends the game, closes window and displays ClientGUI
+	 * @param win	True if player won
+	 * @param pBlack	Number of player's with black stones points
+	 * @param pWhite	Number of player's with white stones points
+	 */
 	public void gameOver(boolean win,float pBlack, float pWhite) {
 		if(win)
 			JOptionPane.showMessageDialog(frame, "You won\n" + "BLACK: " + pBlack + " WHITE: " + pWhite);
@@ -281,6 +329,10 @@ public class BoardGUI{
 		clientGUI.getFrame().setVisible(true);
 	}
 	
+	/**
+	 * Action handler for buttons
+	 *
+	 */
 	class ButtonListener implements ActionListener
 	{
 
@@ -297,6 +349,10 @@ public class BoardGUI{
 		
 	}
 	
+	/**
+	 * Window events handler
+	 *
+	 */
 	class ExitListener extends WindowAdapter {
 
 	    @Override

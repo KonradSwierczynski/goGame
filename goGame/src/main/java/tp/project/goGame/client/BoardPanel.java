@@ -7,8 +7,17 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * Panel for board. Displays image in the background.
+ *
+ */
 public class BoardPanel extends JPanel{
 	Image img;
+	
+	/**
+	 * Constructor, sets background depending on the board size
+	 * @param size Size of the board
+	 */
 	public BoardPanel(int size){
 
 		try {

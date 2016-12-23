@@ -12,6 +12,12 @@ import tp.project.goGame.shared.Protocol;
 import tp.project.goGame.shared.Request;
 import tp.project.goGame.shared.Type;
 
+/**
+ * Main class of client application.
+ * Provides connection with server application.
+ * Manage initialization of gui.
+ *
+ */
 public class ClientModel {
 	private Socket client = null;
 	private BufferedReader in = null;
@@ -29,14 +35,16 @@ public class ClientModel {
 		ClientModel clientModel = new ClientModel();
 	}
 	
-	
+	/**
+	 * Constructor, connects to server.
+	 */
 	ClientModel()
 	{
 		gui = new ClientGUI(this);
 		
 		//Establish connection
 		try {
-			client = new Socket("83.21.37.216",7788);
+			client = new Socket("localhost",7788);
 			out = new PrintWriter(client.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			
@@ -55,31 +63,59 @@ public class ClientModel {
 		out.println(line);
 	}
 	
+	/**
+	 * Getter for ClientSocket
+	 * @return ClientSocket
+	 */
 	public Socket getClient()
 	{
 		return client;
 	}
 	
+	/**
+	 * Getter for nick name of the player
+	 * @return Nick name of the player
+	 */
 	public String getNickname()
 	{
 		return this.nickname;
 	}
 	
+	/**
+	 * Setter for the game size
+	 * @param gameSize Size of the board in the game
+	 */
 	public void setGameSize(int gameSize)
 	{
 		this.gameSize = gameSize;
 	}
 	
+	/**
+	 * Getter for the game size
+	 * @return Size of the board in the game
+	 */
 	public int getGameSize()
 	{
 		return this.gameSize;
 	}
 	
+	/**
+	 * Sends move with proper message to server
+	 * @param x First coordinate of new move
+	 * @param y Second coordinate of new move
+	 */
 	public void sendMove(int x, int y) {
 		Request request = new Request(Type.MOVE, Integer.toString(x) + ":" + Integer.toString(y) + ":" + Integer.toString(myColor));
 		sendToServer(Protocol.getMessage(request));
 	}
 	
+	/**
+	 * Starts new game and displays GUI
+	 * @param size Size of the board in game
+	 * @param color	Color of player's stone
+	 * @param nicknameOpponent	Nick name of the opponent
+	 * @param bot	True when playing with bot
+	 */
 	public void startNewGame(int size, int color, String nicknameOpponent,boolean bot) {
 		myColor = color;
 		gui.getFrame().setVisible(false);
@@ -88,6 +124,9 @@ public class ClientModel {
 		boardGUI = new BoardGUI(this,this.gui,nicknameOpponent,color,size,bot);
 	}
 	
+	/**
+	 * Thread recivig messages from server
+	 */
 	class ListenFromServer extends Thread
 	{
 		public void run()

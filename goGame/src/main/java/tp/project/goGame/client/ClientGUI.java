@@ -25,6 +25,13 @@ import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import java.awt.Font;
 
+/**
+ * Class to display and control lobby and registering/logging
+ * Communicate with server via CilentModel.
+ * @see ClienModel
+ * @see	ClientGUI
+ *
+ */
 public class ClientGUI implements ActionListener {
 
 	private ClientModel clientModel = null;
@@ -51,6 +58,9 @@ public class ClientGUI implements ActionListener {
 		frame.setVisible(true);
 	}
 	
+	/**
+	 * Initialize all GUI elements
+	 */
 	void initialize()
 	{
 		frame = new JFrame();
@@ -297,11 +307,19 @@ public class ClientGUI implements ActionListener {
         });
 	}
 	
+	/**
+	 * Gettet for the frame
+	 * @return Current frame
+	 */
 	public JFrame getFrame()
 	{
 		return frame;
 	}
 	
+	/**
+	 * Sets nickname of the player
+	 * @param nickname	Nickname of the player
+	 */
 	public void setNickname(String nickname)
 	{
 		lblnick.setText("Logged as: " + nickname);
@@ -321,6 +339,9 @@ public class ClientGUI implements ActionListener {
 		cl.show(panel, "logged");
 	}
 	
+	/**
+	 * Shows welcome message
+	 */
 	public void showWelcome()
 	{
 		btnLogIn.setEnabled(true);
@@ -328,6 +349,9 @@ public class ClientGUI implements ActionListener {
 		cl.show(panel, "welcome");
 	}
 	
+	/**
+	 * Shows form for registering
+	 */
 	public void showRegister()
 	{
 		btnRegister.setEnabled(true);
@@ -335,12 +359,18 @@ public class ClientGUI implements ActionListener {
 		cl.show(panel, "register");
 	}
 	
+	/**
+	 * Shows panel with choices concerning new game
+	 */
 	public void showNewGame()
 	{
 		CardLayout cl = (CardLayout)panel.getLayout();
 		cl.show(panel, "choice");
 	}
 	
+	/**
+	 * Shows waiting status
+	 */
 	public void showQueue()
 	{
 		CardLayout cl = (CardLayout)panel.getLayout();
