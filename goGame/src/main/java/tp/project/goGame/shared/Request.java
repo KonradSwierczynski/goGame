@@ -4,6 +4,7 @@ package tp.project.goGame.shared;
  * This is a Request type
  * it holds type and value
  * @author Bartek
+ * Class for messages made to send between client and server
  *
  */
 public class Request {

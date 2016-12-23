@@ -177,15 +177,15 @@ public class Board {
 					}
 				}
 			}
+		
+		
+			this.blackScore += this.blackCaptured - blackCapturedBk;
+			this.whiteScore += this.whiteCaptured - whiteCapturedBk;
+			this.blackCaptured = blackCapturedBk;
+			this.whiteCaptured = whiteCapturedBk;
+			
+			markTerritory();
 		}
-		
-		
-		this.blackScore += this.blackCaptured - blackCapturedBk;
-		this.whiteScore += this.whiteCaptured - whiteCapturedBk;
-		this.blackCaptured = blackCapturedBk;
-		this.whiteCaptured = whiteCapturedBk;
-		
-		markTerritory();
 		
 		this.printBoards();
 	}

@@ -8,6 +8,10 @@ import tp.project.goGame.server.GameThread;
 import tp.project.goGame.shared.Request;
 import tp.project.goGame.shared.Type;
 
+/**
+ * State for user waiting in queue
+ *
+ */
 public class InQueueState implements MyState {
 
 	@Override

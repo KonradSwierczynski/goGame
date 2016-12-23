@@ -1,5 +1,9 @@
 package tp.project.goGame.shared;
 
+/**
+ * Enum for possible sizes of board in the game
+ *
+ */
 public enum GameSize {
 	size9x9 (9),
 	size13x13 (13),

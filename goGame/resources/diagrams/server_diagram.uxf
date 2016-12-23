@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>896</x>
+      <y>329</y>
+      <w>182</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.server::ClientThread
+--
+-in = null: BufferedReader
+-out = null: PrintWriter
+-clientSocket = null: Socket
+-account = null: Account
+-myState = null: MyState
+-gameSize: int
+-currentGame = null: GameThread
+--
++ClientThread(Socket clientSocket): ctor
++run(): void
++proceedAction(String line): Request
++changeState(MyState state): void
++getMyState(): MyState
++setGame(GameThread game): void
++getGame(): GameThread
++getAccount(): Account
++setGameSize(int gameSize): void
++getGameSize(): int
++sendToClient(String input): void
++setAccount(Account account): void
+-log(Socket client, String message): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>497</x>
+      <y>329</y>
+      <w>357</w>
+      <h>266</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.server::GameThread
+--
+~player1, player2 = null: ClientThread
+~gameSize: int
+~board = null: Board
+~passCount = 0: int
+~denyCount = 0: int
+~accCount = 0: int
+~acc1, acc2 = false: boolean
+--
++GameThread(ClientThread player1, ClientThread player2, int gameSize): ctor
++ansEGP(ClientThread from, int value): int
++makePass(ClientThread from): Request
++makeMove(ClientThread from, int x, int y, int color): Request
++QuitGamePlayers(): void
+~sendToClients(ClientThread from, String input): void
++getWinner(): String
++getWhiteScore(): float
++getBlackScore(): float
++restoreBoard(): void
++getBoard(): String
++getOpponentNickname(ClientThread client): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1036</x>
+      <y>42</y>
+      <w>280</w>
+      <h>196</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.server::Server
+--
+-PORT = 7788: int
+-instance: Server
+-serverSocket = null: ServerSocket
+-clientSocket = null: Socket
+-gui = null: ServerGUI
+-clients = new Vector&lt;ClientThread&gt;(): Vector&lt;ClientThread&gt;
+-games = new Vector&lt;GameThread&gt;(): Vector&lt;GameThread&gt;
+--
++getInstance(): Server
++main(String[] args): void
++closeThread(ClientThread clientThread): void
++checkQueue(ClientThread new_one, int gameSize): void
++log(String message): void
++log(Socket client, String message): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>679</x>
+      <y>42</y>
+      <w>175</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.server::ServerGUI
+--
+-frame: JFrame
+-logArea: JTextArea
+-passwordField: JPasswordField
+--
++ServerGUI(): ctor
++addLog(String message): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>847</x>
+      <y>35</y>
+      <w>203</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+</panel_attributes>
+    <additional_attributes>10.0;20.0;270.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>938</x>
+      <y>49</y>
+      <w>112</w>
+      <h>294</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;400.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>847</x>
+      <y>322</y>
+      <w>63</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1617</x>
+      <y>665</y>
+      <w>287</w>
+      <h>196</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.state::ConnectedState
+--
+-instance: MyState
+--
++ChangeState(ClientThread client, MyState state): void
++LogIn(ClientThread client, String input): Request
++Register(String input): Request
++LogOut(ClientThread client): Request
++PlayGame(ClientThread client, String input): Request
++SendMesage(String input): Request
++MakeMove(GameThread gameThread, String input): Request
++QuitGame(ClientThread client): Request
++QuitQueue(ClientThread client): Request
++toString(): String
++StartGame(ClientThread client, String input): Request
++QuitGame(ClientThread client, String input): Request
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1015</x>
+      <y>665</y>
+      <w>287</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.state::LoggedInState
+--
+--
++ChangeState(ClientThread client, MyState state): void
++LogIn(ClientThread client, String input): Request
++Register(String input): Request
++LogOut(ClientThread client): Request
++PlayGame(ClientThread client, String input): Request
++SendMesage(String input): Request
++MakeMove(GameThread gameThread, String input): Request
++QuitGame(ClientThread client): Request
++QuitQueue(ClientThread client): Request
++toString(): String
++StartGame(ClientThread client, String input): Request
++QuitGame(ClientThread client, String input): Request
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>707</x>
+      <y>665</y>
+      <w>287</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.state::InGameState
+--
+--
++ChangeState(ClientThread client, MyState state): void
++LogIn(ClientThread client, String input): Request
++Register(String input): Request
++LogOut(ClientThread client): Request
++PlayGame(ClientThread client, String input): Request
++SendMesage(String input): Request
++MakeMove(GameThread gameThread, String input): Request
++QuitGame(ClientThread client, String input): Request
++QuitQueue(ClientThread client): Request
++toString(): String
++StartGame(ClientThread client, String input): Request
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1316</x>
+      <y>665</y>
+      <w>287</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.state::InQueueState
+--
+--
++ChangeState(ClientThread client, MyState state): void
++LogIn(ClientThread client, String input): Request
++Register(String input): Request
++LogOut(ClientThread client): Request
++PlayGame(ClientThread client, String input): Request
++SendMesage(String input): Request
++MakeMove(GameThread gameThread, String input): Request
++QuitQueue(ClientThread client): Request
++toString(): String
++StartGame(ClientThread client, String input): Request
++QuitGame(ClientThread client, String input): Request
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1428</x>
+      <y>329</y>
+      <w>287</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+tp.project.goGame.state::MyState
+--
+--
+~ChangeState(ClientThread client, MyState state): void
++LogIn(ClientThread client, String input): Request
++Register(String input): Request
++LogOut(ClientThread client): Request
++PlayGame(ClientThread client, String input): Request
++StartGame(ClientThread client, String input): Request
++SendMesage(String input): Request
++MakeMove(GameThread gameThread, String input): Request
++QuitGame(ClientThread client, String input): Request
++QuitQueue(ClientThread client): Request
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1148</x>
+      <y>315</y>
+      <w>217</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.state::DataBaseConnector
+--
+-instance: DataBaseConnector
+--
++getInstance(): DataBaseConnector
++getSessionFactory(): SessionFactory
++create(Account e): Integer
++read(): List&lt;Account&gt;
++update(Account e): void
++delete(Integer id): void
++findByID(Integer id): Account
++deleteAll(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1197</x>
+      <y>231</y>
+      <w>63</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>50.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1519</x>
+      <y>497</y>
+      <w>189</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;250.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1456</x>
+      <y>497</y>
+      <w>21</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1204</x>
+      <y>497</y>
+      <w>245</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>330.0;10.0;10.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>917</x>
+      <y>490</y>
+      <w>525</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>730.0;10.0;10.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1071</x>
+      <y>483</y>
+      <w>371</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>510.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>322</y>
+      <w>420</w>
+      <h>455</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.shared::Board
+--
+-KOMI = 6.5f: float
+-blackScore, whiteScore, blackCaptured, whiteCaptured: float
++BLACK = 1, WHITE = 2, EMPTY = 0, BLACKTERRITORY = 3, WHITETERRITORY = 4: int
+-board: int[][]
+-previousBoard: int[][]
+-boardBeforeEnd: int[][]
+-gameSize: GameSize
+-size: int
+-currentLeader = "BOT": String
+--
++Board(GameSize gameSize): ctor
++getSize(): GameSize
++getIntSize(): int
++makeMove(int x, int y, int color): void
+-boardCpy(int[][] to, int[][] from): void
+-printBoards(): void
+-nuberOfStonesOnBoard(): int
++allPositionsOccupied(): boolean
++endGame(): void
+-markTerritory(): void
+-setTerritory(int x, int y, int territoryColor): void
+-isTerritory(int x, int y, int color, int[][] tab): boolean
++getBlackScore(): float
++getWhiteScore(): float
++getBlackCaptured(): float
++getWhiteCaptured(): float
+-opponentColor(int color): int
+-isKo(): boolean
+-updateBoard(int x, int y, int color): void
+-tryToKill(int x, int y, int color): void
+-kill(int x, int y, int color): void
+-hasLiberty(int x, int y, int color, int[][] tab): boolean
+-isInBoard(int x, int y): boolean
++getBoard(): String
++restoreBoard(): void
++getWinner(): String
++setWinner(String winner): void
++makeBotMove(int i): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>413</x>
+      <y>378</y>
+      <w>98</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-
+
+m2=1</panel_attributes>
+    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+  </element>
+</diagram>

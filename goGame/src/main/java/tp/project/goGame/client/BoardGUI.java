@@ -23,7 +23,14 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-
+/**
+ * Class to display and control game.
+ * Displays board and chat, provide action handlers.
+ * Communicate with CilentModel.
+ * @see ClienModel
+ * @see	ClientGUI
+ *
+ */
 public class BoardGUI{
 	
 	/*
@@ -52,16 +59,14 @@ public class BoardGUI{
 	private boolean bot;
 	
 	
-
 	/**
-	 * Board gui is a game board.
-	 * It enables client to send move, pass and message
-	 * @param clientModel client's Model
-	 * @param clientGUI client's Gui
-	 * @param opponentNick nick of opponent
-	 * @param myColor 1-black, 2-white
-	 * @param size size of board
-	 * @param bot playing with bot or no
+	 * Constructor, uses dependency injection.
+	 * @param clientModel	Class to communicate with server.
+	 * @param clientGUI	Instance of ClientGUI used by user.
+	 * @param opponentNick	Nick of opponent in current game.
+	 * @param myColor	My color of stone in the game.
+	 * @param size	Size of the game.
+	 * @param bot	True if playing with bot.
 	 */
 	public BoardGUI(ClientModel clientModel, ClientGUI clientGUI, String opponentNick, int myColor, int size,boolean bot) {
 		this.clientModel = clientModel;
@@ -93,11 +98,19 @@ public class BoardGUI{
 		
 	}
 	
+	/**
+	 * Getter for opponent nick
+	 * @return Opponent nick
+	 */
 	public String getOpponentNickname()
 	{
 		return this.opponentNick;
 	}
 	
+	/**
+	 * Append area for messages with new message.
+	 * @param message	New message
+	 */
 	public void reciveMessage(String message) {
 		this.textArea.append(message + "\n");
 	}
@@ -200,6 +213,9 @@ public class BoardGUI{
 		frame.setVisible(true);
 	}
 	
+	/**
+	 * Disables board.
+	 */
 	public void disableGUI()
 	{
 		for(int i=0;i<size;i++)
@@ -212,6 +228,9 @@ public class BoardGUI{
 		btnPass.setEnabled(false);
 	}
 	
+	/**
+	 * Enables board.
+	 */
 	public void enableGUI()
 	{
 		for(int i=0;i<size;i++)
@@ -226,7 +245,11 @@ public class BoardGUI{
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * Flips turn
+=======
+	 * Changes turn to next player.
+>>>>>>> branch 'master' of https://github.com/bartoszgralek/goGame.git
 	 */
 	public void nextTurn()
 	{
@@ -257,11 +280,19 @@ public class BoardGUI{
 		}
 	}
 	
+	/**
+	 * Getter for frame.
+	 * @return	Main frame.
+	 */
 	public JFrame getFrame()
 	{
 		return this.frame;
 	}
 	
+	/**
+	 * Displays recived board.
+	 * @param boardString Board to display stored in String
+	 */
 	public void updateBoard(String boardString) {
 		System.out.println(boardString);
 		int position = 0;
@@ -275,16 +306,27 @@ public class BoardGUI{
 		}
 	}
 
+	/**
+	 * Ensure that player wants to end the game.
+	 * @return	True if player wants to end the game.
+	 */
 	public int endGamePrompt()
 	{
 		return JOptionPane.showConfirmDialog((Component)null, "End the game?","End game prompt",JOptionPane.YES_NO_OPTION);
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * Dialog with results
 	 * @param win if I won?
 	 * @param pBlack points of Black
 	 * @param pWhite point of White
+=======
+	 * Ends the game, closes window and displays ClientGUI
+	 * @param win	True if player won
+	 * @param pBlack	Number of player's with black stones points
+	 * @param pWhite	Number of player's with white stones points
+>>>>>>> branch 'master' of https://github.com/bartoszgralek/goGame.git
 	 */
 	public void gameOver(boolean win,float pBlack, float pWhite) {
 		if(win)
@@ -298,6 +340,10 @@ public class BoardGUI{
 		clientGUI.getFrame().setVisible(true);
 	}
 	
+	/**
+	 * Action handler for buttons
+	 *
+	 */
 	class ButtonListener implements ActionListener
 	{
 

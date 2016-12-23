@@ -11,6 +11,10 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+/**
+ * Lucent button providing icon changing.
+ * Used for single square in board.
+ */
 public class Button extends JButton{
 	Image img = null;
 	ImageIcon icon = null;
@@ -18,6 +22,11 @@ public class Button extends JButton{
 	
 	private int x,y;
 	
+	/**
+	 * Sets coordinates of the button.
+	 * @param x	First coordinate
+	 * @param y Second coordinate
+	 */
 	public Button(int x, int y)
 	{
 		super();
@@ -28,6 +37,10 @@ public class Button extends JButton{
 		this.setBorderPainted(false);
 	}
 	
+	/**
+	 * Chamges color of the button and icon.
+	 * @param i New color of the button.
+	 */
 	public void setColor(int i)
 	{
 		if(i==1)
