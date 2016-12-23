@@ -16,9 +16,11 @@ public class GameThread {
 	int denyCount = 0;
 	int accCount = 0;
 	boolean acc1,acc2 = false;
-	/*
-	 * player1 is 1(black), player2 is 2(white)
-	 * if player2 is null then it's bot
+	/**
+	 * Depending on game size creates board with given size.
+	 * @param player1 player1 - black
+	 * @param player2 player2 - white, if it's null then it means that it's bot
+	 * @param gameSize game size of this game
 	 */
 	public GameThread(ClientThread player1, ClientThread player2, int gameSize)
 	{
@@ -39,6 +41,12 @@ public class GameThread {
 		}
 	}
 	
+	/**
+	 * This function returns value of End Game Prompt.
+	 * @param from client, who answers for End Game Prompt
+	 * @param value 1-accept 0-deny
+	 * @return 0-draw/deny,1-accept,-1-cannot be said(second client didn't answer)
+	 */
 	public synchronized int ansEGP(ClientThread from,int value)
 	{
 		//1 - accept
@@ -94,6 +102,12 @@ public class GameThread {
 		
 	}
 
+	/**
+	 * Handles pass event
+	 * @param from client, who calls for pass
+	 * @return move with board, when playing with bot, Pass when 1 pass in a row, End Game Prompt when 2 in a row
+	 *
+	 */
 	public Request makePass(ClientThread from)
 	{
 		passCount++;
@@ -127,6 +141,14 @@ public class GameThread {
 		return out;
 	}
 	
+	/**
+	 * This function handles make move from client
+	 * @param from client, who calls for move
+	 * @param x coordinate x
+	 * @param y coordinate y
+	 * @param color color (1/2)
+	 * @return Move request and board, when ok. Deny when wrong move.
+	 */
 	public Request makeMove(ClientThread from, int x, int y,int color)
 	{
 		
@@ -162,13 +184,20 @@ public class GameThread {
 		
 	}
 	
+	/**
+	 * Sets players State to loggedIn when game ends.
+	 */
 	public void QuitGamePlayers()
 	{
-		System.out.println("LogginState players");
 		player1.changeState(new LoggedInState());
 		player2.changeState(new LoggedInState());
 	}
 	
+	/**
+	 * Sends message to second player
+	 * @param from client, who sent message
+	 * @param input message
+	 */
 	void sendToClients(ClientThread from,String input)
 	{
 		if(from.equals(player1) && player2 != null)

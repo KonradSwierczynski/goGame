@@ -53,6 +53,16 @@ public class BoardGUI{
 	
 	
 
+	/**
+	 * Board gui is a game board.
+	 * It enables client to send move, pass and message
+	 * @param clientModel client's Model
+	 * @param clientGUI client's Gui
+	 * @param opponentNick nick of opponent
+	 * @param myColor 1-black, 2-white
+	 * @param size size of board
+	 * @param bot playing with bot or no
+	 */
 	public BoardGUI(ClientModel clientModel, ClientGUI clientGUI, String opponentNick, int myColor, int size,boolean bot) {
 		this.clientModel = clientModel;
 		this.clientGUI = clientGUI;
@@ -215,7 +225,9 @@ public class BoardGUI{
 		btnPass.setEnabled(true);
 	}
 	
-	
+	/**
+	 * Flips turn
+	 */
 	public void nextTurn()
 	{
 		myTurn = !myTurn;
@@ -263,12 +275,17 @@ public class BoardGUI{
 		}
 	}
 
-	
 	public int endGamePrompt()
 	{
 		return JOptionPane.showConfirmDialog((Component)null, "End the game?","End game prompt",JOptionPane.YES_NO_OPTION);
 	}
 	
+	/**
+	 * Dialog with results
+	 * @param win if I won?
+	 * @param pBlack points of Black
+	 * @param pWhite point of White
+	 */
 	public void gameOver(boolean win,float pBlack, float pWhite) {
 		if(win)
 			JOptionPane.showMessageDialog(frame, "You won\n" + "BLACK: " + pBlack + " WHITE: " + pWhite);
@@ -297,6 +314,11 @@ public class BoardGUI{
 		
 	}
 	
+	/**
+	 * Class to handle concede or exit(when playing with bot)
+	 * @author Bartek
+	 *
+	 */
 	class ExitListener extends WindowAdapter {
 
 	    @Override

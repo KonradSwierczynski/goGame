@@ -1,6 +1,11 @@
 package tp.project.goGame.shared;
 
 public class Protocol {
+	/**
+	 * Converts input string from server into request
+	 * @param value input
+	 * @return certain request
+	 */
 	public static Request getRequest(String value)
 	{
 		String str = value.substring(0, 3);
@@ -62,6 +67,11 @@ public class Protocol {
 		return out;
 	}
 
+	/**
+	 * Converts request to string, so it can be sent to server
+	 * @param request request
+	 * @return line
+	 */
 	public static String getMessage(Request request)
 	{
 		String out = null;
@@ -122,6 +132,11 @@ public class Protocol {
 		return out;
 	}
 	
+	/**
+	 * Converts line into solid Account object
+	 * @param line line
+	 * @return Account object 
+	 */
 	public static Account getAccount(String line)
 	{
 		int i;

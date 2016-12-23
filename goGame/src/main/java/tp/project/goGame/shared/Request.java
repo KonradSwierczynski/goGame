@@ -1,5 +1,11 @@
 package tp.project.goGame.shared;
 
+/**
+ * This is a Request type
+ * it holds type and value
+ * @author Bartek
+ *
+ */
 public class Request {
 	private Type type;
 	private String value;

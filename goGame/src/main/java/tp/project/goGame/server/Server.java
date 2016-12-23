@@ -9,6 +9,11 @@ import java.util.Vector;
 import tp.project.goGame.shared.Protocol;
 import tp.project.goGame.shared.Request;
 
+/**
+ * 
+ * @author Bartosz Grałek and Konrad Świerczyński
+ *
+ */
 public class Server {
 	private static final int PORT = 7788;
 	private static Server instance;
@@ -16,9 +21,18 @@ public class Server {
 	private static Socket clientSocket = null;
 	private static ServerGUI gui = null;
 	
+	/*
+	 * Holds vector of connected Clients
+	 */
 	private static Vector<ClientThread> clients = new Vector<ClientThread>();
+	/*
+	 * Holds vector of connected GameThreads
+	 */
 	private static Vector<GameThread> games = new Vector<GameThread>();
 	
+	/*
+	 * There is only one server
+	 */
 	public synchronized static Server getInstance(){
 		if(instance == null)
 		{
@@ -49,6 +63,10 @@ public class Server {
 		}
 	}
 	
+	/**
+	 * closes given client, in order to free memory
+	 * @param clientThread
+	 */
 	public void closeThread(ClientThread clientThread)
 	{
 		try {
@@ -60,7 +78,11 @@ public class Server {
 		}
 		
 	}
-	
+	/**
+	 * This method matches clients and creates new game for them
+	 * @param new_one
+	 * @param gameSize
+	 */
 	public void checkQueue(ClientThread new_one,int gameSize)
 	{
 		for(ClientThread ct: clients)
@@ -85,6 +107,10 @@ public class Server {
 		}
 	}
 	
+	/**
+	 * Simple log
+	 * @param message
+	 */
 	@SuppressWarnings("unused")
 	public static void log(String message)
 	{

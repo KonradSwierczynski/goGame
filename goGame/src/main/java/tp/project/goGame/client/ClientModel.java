@@ -13,6 +13,7 @@ import tp.project.goGame.shared.Request;
 import tp.project.goGame.shared.Type;
 
 public class ClientModel {
+	private String serverIP = "83.21.37.216";
 	private Socket client = null;
 	private BufferedReader in = null;
 	private PrintWriter out = null;
@@ -30,13 +31,15 @@ public class ClientModel {
 	}
 	
 	
-	ClientModel()
+	public ClientModel()
 	{
 		gui = new ClientGUI(this);
+		Object result = JOptionPane.showInputDialog(gui.getFrame(), "Enter server ip:");
+		serverIP = result.toString();
 		
 		//Establish connection
 		try {
-			client = new Socket("83.21.37.216",7788);
+			client = new Socket(serverIP,7788);
 			out = new PrintWriter(client.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			
