@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>384</x>
+      <y>0</y>
+      <w>450</w>
+      <h>312</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.client::BoardGUI
+--
+-clientModel: ClientModel
+-clientGUI: ClientGUI
+-opponentNick: String
+-myColor: int
+-myTurn = true: boolean
+-frame: JFrame
+-buttons: Button[][]
+-textField: JTextField
+-textArea: JTextArea
+-size: int
+-btnPass: JButton
+-panel_1: JPanel
+-lblYou: JLabel
+-lblNewLabel_1: JLabel
++waitForAnswer = false: boolean
+-bot: boolean
+--
++BoardGUI(ClientModel clientModel, ClientGUI clientGUI, String opponentNick, int myColor, int size, boolean bot): ctor
++getOpponentNickname(): String
++reciveMessage(String message): void
+-initialize(): void
++disableGUI(): void
++enableGUI(): void
++nextTurn(): void
++getFrame(): JFrame
++updateBoard(String boardString): void
++endGamePrompt(): int
++gameOver(boolean win, float pBlack, float pWhite): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>72</y>
+      <w>306</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.client::ClientModel
+--
+-client = null: Socket
+-in = null: BufferedReader
+-out = null: PrintWriter
+-nickname = null: String
+-gui = null: ClientGUI
+-boardGUI = null: BoardGUI
+-gameSize = 9: int
+-myColor: int
+--
+~ClientModel(): ctor
++main(String[] args): void
++sendToServer(String line): void
++getClient(): Socket
++getNickname(): String
++setGameSize(int gameSize): void
++getGameSize(): int
++sendMove(int x, int y): void
++startNewGame(int size, int color, String nicknameOpponent, boolean bot): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>888</x>
+      <y>30</y>
+      <w>150</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.client::Button
+--
+~img = null: Image
+~icon = null: ImageIcon
+-pixelSize: int
+-x, y: int
+--
++Button(int x, int y): ctor
++setColor(int i): void
++setPixelSize(int size): void
++getx(): int
++gety(): int
++addListener(ActionListener AL): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>888</x>
+      <y>192</y>
+      <w>150</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.client::BoardPanel
+--
+~img: Image
+--
++BoardPanel(int size): ctor
++paintComponent(Graphics g): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>888</x>
+      <y>330</y>
+      <w>144</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.client::MainPanel
+--
+~stop = null: BufferedImage
+--
++MainPanel(): ctor
+#paintComponent(Graphics g): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>384</x>
+      <y>330</y>
+      <w>186</w>
+      <h>312</h>
+    </coordinates>
+    <panel_attributes>tp.project.goGame.client::ClientGUI
+--
+-clientModel = null: ClientModel
+-frame: JFrame
+-btnLogIn: JButton
+-btnRegister: JButton
+-panel: JPanel
+-panel_wel: JPanel
+-panel_reg: JPanel
+-panel_logged: JPanel
+-usernameField: JTextField
+-passwordField: JPasswordField
+-reg_usernameField: JTextField
+-reg_passwordField: JPasswordField
+-reg_emailReg: JTextField
+-reg_nicknameField: JTextField
+-chckbxBot: JCheckBox
+-lblnick: JLabel
+--
++ClientGUI(final ClientModel clientModel): ctor
+~initialize(): void
++getFrame(): JFrame
++setNickname(String nickname): void
++enableButtons(): void
++showLogged(): void
++showWelcome(): void
++showRegister(): void
++showNewGame(): void
++showQueue(): void
++actionPerformed(ActionEvent e): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>192</y>
+      <w>102</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+</panel_attributes>
+    <additional_attributes>140.0;230.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>84</y>
+      <w>96</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>828</x>
+      <y>54</y>
+      <w>78</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..
+1</panel_attributes>
+    <additional_attributes>100.0;240.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>828</x>
+      <y>36</y>
+      <w>72</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>564</x>
+      <y>318</y>
+      <w>336</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1
+</panel_attributes>
+    <additional_attributes>540.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+</diagram>
