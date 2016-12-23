@@ -202,7 +202,6 @@ public class GameGUI {
 	}
 	
 	public void updateBoard(String boardString) {
-		boardGame.restoreBoard(boardString);
 		int position = 0;
 		for(int i = 0; i < boardGame.getIntSize(); i++) {
 			for(int j = 0; j < boardGame.getIntSize(); j++) {

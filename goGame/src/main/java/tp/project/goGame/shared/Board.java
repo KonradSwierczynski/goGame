@@ -5,11 +5,12 @@ import exceptions.WrongMoveException;
 public class Board {
 	
 	private final float KOMI = 6.5f;
-	private float blackScore, whiteScore;
+	private float blackScore, whiteScore, blackCaptured, whiteCaptured;
 	
 	public int BLACK = 1, WHITE = 2, EMPTY = 0, BLACKTERRITORY = 3, WHITETERRITORY = 4;
 	private int[][] board;
 	private int[][] previousBoard;
+	private int[][] boardBeforeEnd;
 	private GameSize gameSize;
 	private int size;
 	private String currentLeader = "Bartol";
@@ -17,6 +18,7 @@ public class Board {
 	public Board(GameSize gameSize) {
 		this.board = new int[gameSize.getValue()][gameSize.getValue()];
 		this.previousBoard = new int[gameSize.getValue()][gameSize.getValue()];
+		this.boardBeforeEnd = new int[gameSize.getValue()][gameSize.getValue()];
 		this.gameSize = gameSize;
 		this.size = gameSize.getValue();
 	}
@@ -101,6 +103,8 @@ public class Board {
 	}
 	
 	public void endGame() {
+		boardCpy(boardBeforeEnd, board);
+		
 		for(int i = 0; i < size; i++)
 		{
 			for(int j = 0; j < size; j++)
@@ -181,19 +185,19 @@ public class Board {
 	}
 
 	public float getBlackScore() {
-		return blackScore;
+		return blackScore + KOMI + blackCaptured;
 	}
 	
 	public float getWhiteScore() {
-		return whiteScore + KOMI;
+		return whiteScore + whiteCaptured;
 	}
 	
 	public float getBlackCaptured() {
-		return blackScore;
+		return blackCaptured;
 	}
 	
 	public float getWhiteCaptured() {
-		return whiteScore;
+		return whiteCaptured;
 	}
 
 	private int opponentColor(int color) {
@@ -248,9 +252,9 @@ public class Board {
 	private void kill(int x, int y, int color) {
 		board[x][y] = 0;
 		if(color == this.BLACK)
-			blackScore++;
+			blackCaptured++;
 		if(color == this.WHITE)
-			whiteScore++;
+			whiteCaptured++;
 		
 		if(isInBoard(x - 1, y) && board[x - 1][y] == color)
 			kill(x - 1, y, color);	
@@ -301,15 +305,8 @@ public class Board {
 		return boardString;
 	}
 	
-	public void restoreBoard(String boardString) {
-		int position = 3;
-		for(int i = 0; i < size; i++) {
-			for(int j = 0; j < size; j++) {
-				board[i][j] = Character.getNumericValue(boardString.charAt(position));
-				position += 2;
-			}
-			position += 1;
-		}
+	public void restoreBoard() {
+		boardCpy(board, boardBeforeEnd);
 	}
 	
 	public String getWinner()
