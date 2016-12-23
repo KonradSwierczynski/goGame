@@ -7,7 +7,7 @@ public class Board {
 	private final float KOMI = 6.5f;
 	private float blackScore, whiteScore;
 	
-	public int BLACK = 1, WHITE = 2, EMPTY = 0;
+	public int BLACK = 1, WHITE = 2, EMPTY = 0, BLACKTERRITORY = 3, WHITETERRITORY = 4;
 	private int[][] board;
 	private int[][] previousBoard;
 	private GameSize gameSize;
@@ -100,6 +100,86 @@ public class Board {
 		return noFreePositions;
 	}
 	
+	public void endGame() {
+		for(int i = 0; i < size; i++)
+		{
+			for(int j = 0; j < size; j++)
+			{
+				if(board[i][j] == 0) {
+					try {
+						makeMove(i, j, 1);
+					} catch (WrongMoveException e) {
+					}
+					
+					board[i][j] = 0;
+					try {
+						makeMove(i, j, 2);
+					} catch (WrongMoveException e) {
+					}
+					board[i][j] = 0;
+				}
+			}
+		}
+		
+		countTerritory();
+		
+		this.printBoards();
+	}
+	
+	private void countTerritory() {
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				if(board[i][j] == 0) {
+					if(isTerritory(i, j, this.BLACK, new int[size][size])) {
+						setTerritory(i, j, this.BLACKTERRITORY);
+					} else if(isTerritory(i, j, this.WHITE, new int[size][size])) {
+						setTerritory(i, j, this.WHITETERRITORY);
+					}		
+				}
+			}
+		}
+	}
+	
+	
+	private void setTerritory(int x, int y, int territoryColor) {
+		board[x][y] = territoryColor;
+		if(territoryColor == BLACKTERRITORY)
+			blackScore++;
+		if(territoryColor == WHITETERRITORY)
+			whiteScore++;
+		
+		if(isInBoard(x - 1, y) && board[x - 1][y] == 0)
+			setTerritory(x - 1, y, territoryColor);	
+		if(isInBoard(x, y - 1) && board[x][y - 1] == 0)
+			setTerritory(x, y - 1, territoryColor);
+		if(isInBoard(x + 1, y) && board[x + 1][y] == 0)
+			setTerritory(x + 1, y, territoryColor);
+		if(isInBoard(x, y + 1) && board[x][y + 1] == 0)
+			setTerritory(x, y + 1, territoryColor);	
+	}
+
+	private boolean isTerritory(int x, int y, int color, int[][] tab) {
+		if(board[x][y] == color)
+			return true;
+		if(board[x][y] == opponentColor(color) || board[x][y] > 2)
+			return false;
+		
+		tab[x][y] = 1;
+		boolean isTerritory = true;
+		
+		if(isInBoard(x - 1, y) && tab[x - 1][y] == 0)
+			isTerritory = isTerritory && isTerritory(x - 1, y, color, tab);
+		if(isInBoard(x, y - 1) && tab[x][y - 1] == 0)
+			isTerritory = isTerritory && isTerritory(x, y - 1, color, tab);
+		if(isInBoard(x + 1, y) && tab[x + 1][y] == 0)
+			isTerritory = isTerritory && isTerritory(x + 1, y, color, tab);
+		if(isInBoard(x, y + 1) && tab[x][y + 1] == 0)
+			isTerritory = isTerritory && isTerritory(x, y + 1, color, tab);
+		
+		return isTerritory;
+
+	}
+
 	public float getBlackScore() {
 		return blackScore;
 	}
@@ -167,10 +247,10 @@ public class Board {
 
 	private void kill(int x, int y, int color) {
 		board[x][y] = 0;
-		if(color == 1)
-			whiteScore++;
-		if(color == 2)
+		if(color == this.BLACK)
 			blackScore++;
+		if(color == this.WHITE)
+			whiteScore++;
 		
 		if(isInBoard(x - 1, y) && board[x - 1][y] == color)
 			kill(x - 1, y, color);	
