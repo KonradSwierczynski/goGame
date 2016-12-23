@@ -4,6 +4,9 @@ import exceptions.WrongMoveException;
 
 public class Board {
 	
+	private final float KOMI = 6.5f;
+	private float blackScore, whiteScore;
+	
 	public int BLACK = 1, WHITE = 2, EMPTY = 0;
 	private int[][] board;
 	private int[][] previousBoard;
@@ -82,7 +85,7 @@ public class Board {
 		}
 	}
 
-	private boolean checkFreePositions() {
+	public boolean checkFreePositions() {
 		boolean noFreePositions = true;
 		
 		for(int i = 0; i < size; i++)
@@ -94,8 +97,23 @@ public class Board {
 				}
 			}
 		}
-		
 		return noFreePositions;
+	}
+	
+	public float getBlackScore() {
+		return blackScore;
+	}
+	
+	public float getWhiteScore() {
+		return whiteScore + KOMI;
+	}
+	
+	public float getBlackCaptured() {
+		return blackScore;
+	}
+	
+	public float getWhiteCaptured() {
+		return whiteScore;
 	}
 
 	private int opponentColor(int color) {
@@ -149,6 +167,10 @@ public class Board {
 
 	private void kill(int x, int y, int color) {
 		board[x][y] = 0;
+		if(color == 1)
+			whiteScore++;
+		if(color == 2)
+			blackScore++;
 		
 		if(isInBoard(x - 1, y) && board[x - 1][y] == color)
 			kill(x - 1, y, color);	
