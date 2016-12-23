@@ -37,7 +37,7 @@ public class ClientModel {
 		
 		//Establish connection
 		try {
-			client = new Socket("localhost",7788);
+			client = new Socket("83.21.37.216",7788);
 			out = new PrintWriter(client.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			

@@ -120,6 +120,7 @@ public class GameThread {
 					player2.sendToClient(Protocol.getMessage(out));
 				else
 					player1.sendToClient(Protocol.getMessage(out));
+				passCount = 0;
 			}
 		}
 		
