@@ -25,5 +25,17 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="resources/libs/activation.jar"/>
+	<classpathentry kind="lib" path="resources/libs/ajaxswing.jar"/>
+	<classpathentry kind="lib" path="resources/libs/asm-all-5.0.4.jar"/>
+	<classpathentry kind="lib" path="resources/libs/bootstrap.jar"/>
+	<classpathentry kind="lib" path="resources/libs/commons-fileupload-1.3.2.jar"/>
+	<classpathentry kind="lib" path="resources/libs/commons-io-2.2.jar"/>
+	<classpathentry kind="lib" path="resources/libs/commons-lang3-3.0.1.jar"/>
+	<classpathentry kind="lib" path="resources/libs/font.properties"/>
+	<classpathentry kind="lib" path="resources/libs/freemarker.jar"/>
+	<classpathentry kind="lib" path="resources/libs/jackson-core-asl-1.7.4.jar"/>
+	<classpathentry kind="lib" path="resources/libs/jackson-mapper-asl-1.7.4.jar"/>
+	<classpathentry kind="lib" path="resources/libs/asboot.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

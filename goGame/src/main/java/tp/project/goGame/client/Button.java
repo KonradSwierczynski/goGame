@@ -32,6 +32,7 @@ public class Button extends JButton{
 		super();
 		this.x = x;
 		this.y = y;
+		
 		this.setOpaque(false);
 		this.setContentAreaFilled(false);
 		this.setBorderPainted(false);
@@ -46,7 +47,8 @@ public class Button extends JButton{
 		if(i==1)
 		{
 			try {
-				img = ImageIO.read(new File("resources/images/blackStone.png"));
+				img = ImageIO.read(this.getClass()
+			              .getClassLoader().getResource("images/blackStone.png"));
 				img = img.getScaledInstance(this.pixelSize, this.pixelSize, Image.SCALE_DEFAULT);
 				icon = new ImageIcon(img);
 				this.setOpaque(true);
@@ -58,7 +60,8 @@ public class Button extends JButton{
 			}
 		}else if(i==2){
 			try {
-				img = ImageIO.read(new File("resources/images/whiteStone.png"));
+				img = ImageIO.read(this.getClass()
+			              .getClassLoader().getResource("images/whiteStone.png"));
 				img = img.getScaledInstance(this.pixelSize, this.pixelSize, Image.SCALE_DEFAULT);
 				icon = new ImageIcon(img);
 				this.setOpaque(true);

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 
 import tp.project.goGame.shared.Protocol;
@@ -117,12 +118,12 @@ public class Server {
 		if(message.equals(null))
 			gui.addLog("Null message");
 		else
-			gui.addLog(message);
+			gui.addLog(new Date().toString() + ":: " + message);
 	}
 	
 	@SuppressWarnings("unused")
 	public static void log(Socket client,String message)
 	{
-		gui.addLog(client.getInetAddress() + ">" + message);
+		gui.addLog(new Date().toString() + ":: " + client.getInetAddress() + ">" + message);
 	}
 }

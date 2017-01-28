@@ -8,6 +8,8 @@ import java.net.Socket;
 
 import javax.swing.JOptionPane;
 
+import com.creamtec.ajaxswing.core.ClientAgent;
+
 import tp.project.goGame.shared.Protocol;
 import tp.project.goGame.shared.Request;
 import tp.project.goGame.shared.Type;
@@ -19,7 +21,7 @@ import tp.project.goGame.shared.Type;
  *
  */
 public class ClientModel {
-	private String serverIP = "83.21.37.216";
+	private String serverIP = "89.76.231.231";
 	private Socket client = null;
 	private BufferedReader in = null;
 	private PrintWriter out = null;
@@ -41,30 +43,33 @@ public class ClientModel {
 	 */
 	ClientModel()
 	{
-		gui = new ClientGUI(this);
-		Object result = JOptionPane.showInputDialog(gui.getFrame(), "Enter server ip:");
-		serverIP = result.toString();
 		
-		//Establish connection
-		try {
-
-			client = new Socket(serverIP,7788);
-			out = new PrintWriter(client.getOutputStream(), true);
-			in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-			
-			//Start conversation
-			new ListenFromServer().start();
-			
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Couldn't connect to the server");
-			e.printStackTrace();
+		//serverIP = JOptionPane.showInputDialog(null, "Enter server ip:");
+		
+		if(serverIP != null)
+		{
+			//Establish connection
+			try {
+	
+				client = new Socket(serverIP,7788);
+				out = new PrintWriter(client.getOutputStream(), true);
+				in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+				gui = new ClientGUI(this);
+				
+				//Start conversation
+				new ListenFromServer().start();
+				
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Couldn't connect to the server");
+			}
 		}
 	}
 	
 	//SEND TO SERVER LINE
 	public void sendToServer(String line)
 	{
-		out.println(line);
+		if(out!=null)
+			out.println(line);
 	}
 	
 	/**
@@ -142,11 +147,13 @@ public class ClientModel {
 				{
 					
 					line = in.readLine();
+					ClientAgent.getCurrentInstance().setUpdateBrowser(true);
 					if(line != null)
 					{
 						if(Protocol.getRequest(line).getType() == Type.EXIT)
 							break;
 						this.proceedAction(line);
+						
 					}
 				}
 				

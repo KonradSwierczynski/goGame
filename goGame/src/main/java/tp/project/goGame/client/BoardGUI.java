@@ -49,11 +49,12 @@ public class BoardGUI{
 	private Button[][] buttons;
 	private JTextField textField;
 	private JTextArea textArea;
-	private static int size;
+	private static int size = 9;
 	private JButton btnPass;
 	private JPanel panel_1;
 	private JLabel lblYou;
 	private JLabel lblNewLabel_1;
+	private JButton btnBot;
 	
 	public boolean waitForAnswer = false;
 	private boolean bot;
@@ -75,13 +76,15 @@ public class BoardGUI{
 		this.myColor = myColor;
 		this.size = size;
 		this.bot = bot;
-		
 		System.out.println(this.bot);
 		
 		initialize();
 		
+		if(!bot)
+			btnBot.setVisible(false);
 		panel_1.setBackground(Color.BLACK);
 		lblNewLabel_1.setText(opponentNick);
+	
 		frame.setTitle(size + "x" + size +" - go Game");
 		
 		if(myColor == 1)
@@ -126,10 +129,29 @@ public class BoardGUI{
 		frame.getContentPane().setLayout(null);
 		frame.addWindowListener(new ExitListener());
 		
-		BoardPanel panel = new BoardPanel(size);
+		BoardPanel panel = new BoardPanel(9);
 		panel.setBounds(10, 11, 360, 360);
+		panel.setLayout(new GridLayout(9,9));
 		frame.getContentPane().add(panel);
-		panel.setLayout(new GridLayout(size,size));
+		
+		btnBot = new JButton("End");
+		btnBot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int confirm;
+				confirm = JOptionPane.showOptionDialog(
+		   	             null, "Are You Sure you Want to end this Game?", 
+		   	             "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
+		   	             JOptionPane.QUESTION_MESSAGE, null, null, null);
+	        	System.out.println(confirm);
+	        	if(confirm == 0)
+	        	{
+	        		clientModel.sendToServer(Protocol.getMessage(new Request(Type.CONCEDE,"bot")));
+	        	}
+			}
+		});
+		btnBot.setBounds(426, 371, 87, 17);
+		frame.getContentPane().add(btnBot);
+		
 		
 		textArea = new JTextArea();
 		textArea.setBounds(380, 88, 175, 218);
@@ -370,19 +392,8 @@ public class BoardGUI{
 	    @Override
 	    public void windowClosing(WindowEvent e) {
 	        int confirm;
-	        if(bot)
-	        {
-	        	confirm = JOptionPane.showOptionDialog(
-		   	             null, "Are You Sure you Want to end this Game?", 
-		   	             "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
-		   	             JOptionPane.QUESTION_MESSAGE, null, null, null);
-	        	System.out.println(confirm);
-	        	if(confirm == 0)
-	        	{
-	        		clientModel.sendToServer(Protocol.getMessage(new Request(Type.CONCEDE,"bot")));
-	        	}
-	        }else
-	        {
+	       
+	        
 	        	confirm = JOptionPane.showOptionDialog(
 	   	             null, "Are You Sure you Want to Concede?", 
 	   	             "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
@@ -391,8 +402,8 @@ public class BoardGUI{
 	        	if (confirm == 0) {
 	        		clientModel.sendToServer(Protocol.getMessage(new Request(Type.CONCEDE,"pvp")));
 	 	        }
-	        }
+	        
 	        
 	    }
-	};
+	}
 }
